@@ -7,7 +7,6 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.data import Data  # noqa: F401,E501
-from swagger_server.models.solution import Solution  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -17,17 +16,17 @@ class DataTrain(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, data: Data=None, solution: Solution=None):  # noqa: E501
+    def __init__(self, data: Data=None, solution: int=None):  # noqa: E501
         """DataTrain - a model defined in Swagger
 
         :param data: The data of this DataTrain.  # noqa: E501
         :type data: Data
         :param solution: The solution of this DataTrain.  # noqa: E501
-        :type solution: Solution
+        :type solution: int
         """
         self.swagger_types = {
             'data': Data,
-            'solution': Solution
+            'solution': int
         }
 
         self.attribute_map = {
@@ -71,22 +70,22 @@ class DataTrain(Model):
         self._data = data
 
     @property
-    def solution(self) -> Solution:
+    def solution(self) -> int:
         """Gets the solution of this DataTrain.
 
 
         :return: The solution of this DataTrain.
-        :rtype: Solution
+        :rtype: int
         """
         return self._solution
 
     @solution.setter
-    def solution(self, solution: Solution):
+    def solution(self, solution: int):
         """Sets the solution of this DataTrain.
 
 
         :param solution: The solution of this DataTrain.
-        :type solution: Solution
+        :type solution: int
         """
 
         self._solution = solution

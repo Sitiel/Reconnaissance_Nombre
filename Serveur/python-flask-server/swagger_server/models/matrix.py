@@ -15,15 +15,26 @@ class Matrix(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self):  # noqa: E501
+    def __init__(self, method: str=None, val: List[str]=None):  # noqa: E501
         """Matrix - a model defined in Swagger
 
+        :param method: The method of this Matrix.  # noqa: E501
+        :type method: str
+        :param val: The val of this Matrix.  # noqa: E501
+        :type val: List[str]
         """
         self.swagger_types = {
+            'method': str,
+            'val': List[str]
         }
 
         self.attribute_map = {
+            'method': 'method',
+            'val': 'val'
         }
+
+        self._method = method
+        self._val = val
 
     @classmethod
     def from_dict(cls, dikt) -> 'Matrix':
@@ -35,3 +46,45 @@ class Matrix(Model):
         :rtype: Matrix
         """
         return util.deserialize_model(dikt, cls)
+
+    @property
+    def method(self) -> str:
+        """Gets the method of this Matrix.
+
+
+        :return: The method of this Matrix.
+        :rtype: str
+        """
+        return self._method
+
+    @method.setter
+    def method(self, method: str):
+        """Sets the method of this Matrix.
+
+
+        :param method: The method of this Matrix.
+        :type method: str
+        """
+
+        self._method = method
+
+    @property
+    def val(self) -> List[str]:
+        """Gets the val of this Matrix.
+
+
+        :return: The val of this Matrix.
+        :rtype: List[str]
+        """
+        return self._val
+
+    @val.setter
+    def val(self, val: List[str]):
+        """Sets the val of this Matrix.
+
+
+        :param val: The val of this Matrix.
+        :type val: List[str]
+        """
+
+        self._val = val
