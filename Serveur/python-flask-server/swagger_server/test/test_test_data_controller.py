@@ -6,7 +6,7 @@ from flask import json
 from six import BytesIO
 
 from swagger_server.models.data import Data  # noqa: E501
-from swagger_server.models.solutions import Solutions  # noqa: E501
+from swagger_server.models.solution import Solution  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 

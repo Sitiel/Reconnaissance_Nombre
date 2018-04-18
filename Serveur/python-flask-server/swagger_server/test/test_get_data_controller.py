@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.list_matrix import ListMatrix  # noqa: E501
+from swagger_server.models.matrix import Matrix  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 

@@ -15,21 +15,15 @@ class Data(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, image: List[str]=None):  # noqa: E501
+    def __init__(self):  # noqa: E501
         """Data - a model defined in Swagger
 
-        :param image: The image of this Data.  # noqa: E501
-        :type image: List[str]
         """
         self.swagger_types = {
-            'image': List[str]
         }
 
         self.attribute_map = {
-            'image': 'image'
         }
-
-        self._image = image
 
     @classmethod
     def from_dict(cls, dikt) -> 'Data':
@@ -41,24 +35,3 @@ class Data(Model):
         :rtype: Data
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def image(self) -> List[str]:
-        """Gets the image of this Data.
-
-
-        :return: The image of this Data.
-        :rtype: List[str]
-        """
-        return self._image
-
-    @image.setter
-    def image(self, image: List[str]):
-        """Sets the image of this Data.
-
-
-        :param image: The image of this Data.
-        :type image: List[str]
-        """
-
-        self._image = image

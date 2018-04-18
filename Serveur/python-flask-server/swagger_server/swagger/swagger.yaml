@@ -64,7 +64,7 @@ paths:
         200:
           description: "return solution"
           schema:
-            $ref: "#/definitions/solutions"
+            $ref: "#/definitions/solution"
         400:
           description: "bad input parameter"
       x-swagger-router-controller: "swagger_server.controllers.test_data_controller"
@@ -82,7 +82,7 @@ paths:
         200:
           description: "return solution"
           schema:
-            $ref: "#/definitions/listMatrix"
+            $ref: "#/definitions/matrix"
         400:
           description: "bad input parameter"
       x-swagger-router-controller: "swagger_server.controllers.get_data_controller"
@@ -104,52 +104,25 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.manage_training_controller"
 definitions:
   data:
-    type: "object"
-    properties:
-      image:
-        type: "array"
-        items:
-          type: "string"
-    example: "[1,1,1,1,1,0,1,0,1,0,1,0,1,1,1]"
-  matrix:
-    type: "object"
-    properties:
-      method:
-        type: "string"
-      val:
-        type: "array"
-        items:
-          type: "string"
-    example: "[[1,1,1,1],[1,0,1,0],[1,0,1,0],[1,1,1,1]]"
-  listMatrix:
-    type: "object"
-    properties:
-      data:
-        type: "array"
-        items:
-          $ref: "#/definitions/matrix"
-    example:
-      data:
-      - "[[1,1,1,1],[1,0,1,0],[1,0,1,0],[1,1,1,1]]"
-      - "[[1,1,1,1],[1,0,1,0],[1,0,1,0],[1,1,1,1]]"
-  solution:
-    type: "object"
-    properties:
-      method:
-        type: "string"
-      val:
-        type: "integer"
-  solutions:
     type: "array"
     items:
-      $ref: "#/definitions/solution"
+      type: "integer"
+    example: "[1,1,1,1,1,0,1,0,1,0,1,0,1,1,1]"
+  matrix:
+    type: "array"
+    items:
+      type: "integer"
+    example: "[[1,1,1,1],[1,0,1,0],[1,0,1,0],[1,1,1,1]]"
+  solution:
+    type: "integer"
+    example: 1
   dataTrain:
     type: "object"
     properties:
       data:
         $ref: "#/definitions/data"
       solution:
-        type: "integer"
+        $ref: "#/definitions/solution"
     example:
       data:
       - 1
@@ -167,4 +140,4 @@ definitions:
       - 1
       - 1
       - 1
-      solution: 5
+      solution:5: null

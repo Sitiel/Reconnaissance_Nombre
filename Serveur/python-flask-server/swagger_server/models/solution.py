@@ -15,26 +15,15 @@ class Solution(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, method: str=None, val: int=None):  # noqa: E501
+    def __init__(self):  # noqa: E501
         """Solution - a model defined in Swagger
 
-        :param method: The method of this Solution.  # noqa: E501
-        :type method: str
-        :param val: The val of this Solution.  # noqa: E501
-        :type val: int
         """
         self.swagger_types = {
-            'method': str,
-            'val': int
         }
 
         self.attribute_map = {
-            'method': 'method',
-            'val': 'val'
         }
-
-        self._method = method
-        self._val = val
 
     @classmethod
     def from_dict(cls, dikt) -> 'Solution':
@@ -46,45 +35,3 @@ class Solution(Model):
         :rtype: Solution
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def method(self) -> str:
-        """Gets the method of this Solution.
-
-
-        :return: The method of this Solution.
-        :rtype: str
-        """
-        return self._method
-
-    @method.setter
-    def method(self, method: str):
-        """Sets the method of this Solution.
-
-
-        :param method: The method of this Solution.
-        :type method: str
-        """
-
-        self._method = method
-
-    @property
-    def val(self) -> int:
-        """Gets the val of this Solution.
-
-
-        :return: The val of this Solution.
-        :rtype: int
-        """
-        return self._val
-
-    @val.setter
-    def val(self, val: int):
-        """Sets the val of this Solution.
-
-
-        :param val: The val of this Solution.
-        :type val: int
-        """
-
-        self._val = val
