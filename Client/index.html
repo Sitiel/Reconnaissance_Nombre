@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!-- Bootstrap -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- jQuery library -->
+                <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <meta charset="UTF-8">
+
+        <title>Apprentissage.io</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <h1>Apprentissage</h1>
+        <div id="page" class="row">
+            <!-- La div contenant les blocs pour le dessin d'un chiffre -->
+            <div id="div_dessin" class="col-4">
+                <div id="dessin">
+                    <canvas id="canvas" width="300" height="300"></canvas>
+                </div>
+                <div id="boutons_dessin">
+                    <button onclick="sendToDB()">Add to train</button>
+                    <button onclick="sendToDB()">try to guess</button>
+                    <button onclick="clearNumber()">clear</button>
+                </div>
+                
+                <button class="btn btn-primary" id="envoi_dessin">Envoi dessin</button>
+            </div>
+            <!-- La div contenant les blocs pour l'affichage du resultat -->
+            <div id="div_result" class="col-8">
+                <div>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">KVoisins</th>
+                                <th scope="col">Bayesienne</th>
+                                <th scope="col">Neuronnes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Result KVoisin</td>
+                                <td>Result Bayesienne</td>
+                                <td>Result Neuronnes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="kvoisin-tab" data-toggle="tab" href="#kvoisin" role="tab" aria-controls="kvoisin" aria-selected="true">KVoisins</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="bayesienne-tab" data-toggle="tab" href="#bayesienne" role="tab" aria-controls="bayesienne" aria-selected="false">Bayesienne</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="neuronnes-tab" data-toggle="tab" href="#neuronnes" role="tab" aria-controls="neuronnes" aria-selected="false">Neuronnes</a>
+                        </li>
+                    </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="kvoisin" role="tabpanel" aria-labelledby="kvoisin-tab">
+                                <!-- Ecriture d'une matrice sur les kvoisins en un tableau 9*9 -->
+                                J'AIME LE KVOISIN
+                            </div>
+                            <div class="tab-pane fade" id="bayesienne" role="tabpanel" aria-labelledby="bayesienne-tab">
+                                <!-- Ecriture d'une matrice sur la methode bayesienne en un tableau 9*9 -->
+                                J'AIME LE BAYESIEN
+                            </div>
+                            <div class="tab-pane fade" id="neuronnes" role="tabpanel" aria-labelledby="neuronnes-tab">
+                                <!-- Ecriture d'une matrice sur les neuronnes en un tableau 9*9 -->
+                                J'AIME LES NEURONNES
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/script.js"></script>
+    </body>
+</html>

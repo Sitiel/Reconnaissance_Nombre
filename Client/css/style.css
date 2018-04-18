@@ -1,0 +1,19 @@
+#div_dessin{
+	height:100%;
+	padding: 2%;
+}
+
+#div_result{
+	height:100%;
+	padding: 2%;
+}
+
+body{
+	background-image: url("Background.jpg");
+	background-repeat: no-repeat;
+	background-size:cover;
+}
+
+td{
+	color:#fff;
+}
