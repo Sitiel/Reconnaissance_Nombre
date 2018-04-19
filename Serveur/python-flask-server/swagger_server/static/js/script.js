@@ -149,6 +149,9 @@ function sendToDB() {
         data: data,
         success: function(response){
             alert("Reçu");
+            //mettre à jour les resultats
+
+
             //Une fois les resultats reçus on mets a jour les matrices
     		getMatrix();
         },
@@ -184,8 +187,6 @@ function getMatrix() {
         }
     });
 }
-
-
 
 function clearNumber() {
 	number.fill(-1, 0);

@@ -8,6 +8,23 @@
 	padding: 2%;
 }
 
+#title{
+	padding: 20px 20px 40px 20px;
+	color: white;
+}
+
+#dessin{
+	padding-bottom: 20px;
+}
+
+canvas{
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 body{
 	background-image: url("Background.jpg");
 	background-repeat: no-repeat;
