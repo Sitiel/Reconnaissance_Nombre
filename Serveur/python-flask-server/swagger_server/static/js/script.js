@@ -103,18 +103,22 @@ function draw() {
 }
 
 function displayNumber() {
-	alert("Number : " + number.toString());
+	//alert("[" + number.toString() + "]");
+	alert(JSON.stringify(number));
 }
 
+function addToTrain() {
 
-function sendToDB() {
-	//Fonction avec un appel ajax qui va envoyer en AJAX au format JSON l'image dessinée et l'envoyer au serveur python
-    displayNumber();
+    var chiffre = prompt("Quel chiffre avez vous écrit ?", 0);
+    chiffre = parseInt(chiffre);
+    var data = JSON.stringify({'data':number,'solution':chiffre});
+    console.log(data);
     $.ajax({
-        url: "http://www.google.fr",
+    	url: "/add",
         type: "post",
+        contentType: "application/json",
         datatype:"json",
-        data: {'key':'value','key2':'value2'},
+        data: data,
         success: function(response){
             alert("Reçu");
         },
@@ -128,7 +132,57 @@ function sendToDB() {
             console.log(errorThrown);
         }
     });
+
+}
+
+function sendToDB() {
+	//Fonction avec un appel ajax qui va envoyer en AJAX au format JSON l'image dessinée et l'envoyer au serveur python
+    displayNumber();
+    data = JSON.stringify({'data':number});
+    $.ajax({
+        url: "/test",
+        type: "post",
+        contentType: "application/json",
+        datatype:"json",
+        data: data,
+        success: function(response){
+            alert("Reçu");
+            //Une fois les resultats reçus on mets a jour les matrices
+    		getMatrix();
+        },
+        error: function(jqXHR,textStatus,errorThrown){
+        	alert("ERROR");
+        	console.log('jqXHR:');
+            console.log(jqXHR);
+            console.log('textStatus:');
+            console.log(textStatus);
+            console.log('errorThrown:');
+            console.log(errorThrown);
+        }
+    });
+    
 }	
+
+function getMatrix() {
+	$.ajax({
+        url: "localhost:8080/add",
+        type: "post",
+        contentType: "application/json; charset=utf-8",
+        success: function(response){
+            alert("Reçu");
+        },
+        error: function(jqXHR,textStatus,errorThrown){
+        	alert("ERROR");
+        	console.log('jqXHR:');
+            console.log(jqXHR);
+            console.log('textStatus:');
+            console.log(textStatus);
+            console.log('errorThrown:');
+            console.log(errorThrown);
+        }
+    });
+}
+
 
 
 function clearNumber() {

@@ -22,7 +22,7 @@
                     <canvas id="canvas" width="300" height="300"></canvas>
                 </div>
                 <div id="boutons_dessin">
-                    <button onclick="sendToDB()">Add to train</button>
+                    <button onclick="addToTrain()">Add to train</button>
                     <button onclick="sendToDB()">try to guess</button>
                     <button onclick="clearNumber()">clear</button>
                 </div>
@@ -37,14 +37,14 @@
                             <tr>
                                 <th scope="col">KVoisins</th>
                                 <th scope="col">Bayesienne</th>
-                                <th scope="col">Neuronnes</th>
+                                <th scope="col">Neurones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Result KVoisin</td>
-                                <td>Result Bayesienne</td>
-                                <td>Result Neuronnes</td>
+                                <td id="res_kvois">Result KVoisin</td>
+                                <td id="res_bayes">Result Bayesienne</td>
+                                <td id="res_neuro">Result Neurones</td>
                             </tr>
                         </tbody>
                     </table>
@@ -58,7 +58,7 @@
                             <a class="nav-link" id="bayesienne-tab" data-toggle="tab" href="#bayesienne" role="tab" aria-controls="bayesienne" aria-selected="false">Bayesienne</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="neuronnes-tab" data-toggle="tab" href="#neuronnes" role="tab" aria-controls="neuronnes" aria-selected="false">Neuronnes</a>
+                            <a class="nav-link" id="neuronnes-tab" data-toggle="tab" href="#neuronnes" role="tab" aria-controls="neuronnes" aria-selected="false">Neurones</a>
                         </li>
                     </ul>
                         <div class="tab-content" id="myTabContent">
