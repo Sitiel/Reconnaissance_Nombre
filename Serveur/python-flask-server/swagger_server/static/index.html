@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1>Apprentissage</h1>
+        <h1 id="title" class="text-center">Apprentissage</h1>
         <div id="page" class="row">
             <!-- La div contenant les blocs pour le dessin d'un chiffre -->
             <div id="div_dessin" class="col-4">
@@ -22,12 +22,10 @@
                     <canvas id="canvas" width="300" height="300"></canvas>
                 </div>
                 <div id="boutons_dessin">
-                    <button onclick="addToTrain()">Add to train</button>
-                    <button onclick="sendToDB()">try to guess</button>
-                    <button onclick="clearNumber()">clear</button>
+                    <button class="btn btn-primary btn-block" onclick="addToTrain()">Add to train</button>
+                    <button class="btn btn-primary btn-block" onclick="sendToDB()">Try to guess</button>
+                    <button class="btn btn-primary btn-block" onclick="clearNumber()">Clear</button>
                 </div>
-                
-                <button class="btn btn-primary" id="envoi_dessin">Envoi dessin</button>
             </div>
             <!-- La div contenant les blocs pour l'affichage du resultat -->
             <div id="div_result" class="col-8">
