@@ -24,4 +24,4 @@ def test_data(image):  # noqa: E501
 
     if connexion.request.is_json:
         image = Data.from_dict(connexion.request.get_json())  # noqa: E501
-    return {"kmeans": result}
+    return {"kmeans": result, 'baye': -1, 'neural': -1}
