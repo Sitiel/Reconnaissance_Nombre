@@ -1,9 +1,11 @@
 # image 1 est l'image model, image 2 est l'image a centrer
+import copy
+
 def centrage(image1, image2, largeur, hauteur):
     i = 0
     dist = 0
-    imageRet = image2
-    imageCourante = image2
+    imageRet = copy.deepcopy(image2)
+    imageCourante = copy.deepcopy(image2)
     bestDistance = largeur * hauteur
     for k in range(0, largeur):
         for j in range(0, hauteur):
@@ -12,7 +14,7 @@ def centrage(image1, image2, largeur, hauteur):
             if bestDistance > dist:
                 bestDistance = dist
                 i = k * largeur + j
-                imageRet = imageCourante
+                imageRet = copy.deepcopy(imageCourante)
             if bestDistance == 0:
                 return imageCourante
         imageCourante = deplacementImage(imageCourante, 1, largeur, hauteur)
@@ -20,7 +22,7 @@ def centrage(image1, image2, largeur, hauteur):
         if bestDistance > distance(imageCourante, image1):
             bestDistance = dist
             i = k * (largeur + 1)
-            imageRet = imageCourante
+            imageRet = copy.deepcopy(imageCourante)
         if bestDistance == 0:
             return imageCourante
     return imageRet
