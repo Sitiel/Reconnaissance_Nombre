@@ -1,7 +1,7 @@
 # image 1 est l'image model, image 2 est l'image a centrer
 import copy
 
-def centrage(image1, image2, largeur, hauteur):
+def centrage(image2, image1, largeur, hauteur):
     i = 0
     dist = 0
     imageRet = copy.deepcopy(image2)
