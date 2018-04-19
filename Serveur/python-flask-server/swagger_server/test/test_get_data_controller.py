@@ -12,8 +12,8 @@ from swagger_server.test import BaseTestCase
 class TestGetDataController(BaseTestCase):
     """GetDataController integration test stubs"""
 
-    def test_get_maxtrix_master_get_maxtrix_get_maxtrix(self):
-        """Test case for get_maxtrix_master_get_maxtrix_get_maxtrix
+    def test_get_maxtrix(self):
+        """Test case for get_maxtrix
 
         Get Confusion Matrix of all Algorithms
         """

@@ -12,8 +12,8 @@ from swagger_server.test import BaseTestCase
 class TestManageTrainingController(BaseTestCase):
     """ManageTrainingController integration test stubs"""
 
-    def test_add_data_master_add_data_add_data(self):
-        """Test case for add_data_master_add_data_add_data
+    def test_add_data(self):
+        """Test case for add_data
 
         Add a train data in database
         """
@@ -26,8 +26,8 @@ class TestManageTrainingController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_start_train_master_start_train_start_train(self):
-        """Test case for start_train_master_start_train_start_train
+    def test_start_train(self):
+        """Test case for start_train
 
         Get Confusion Matrix of all Algorithms
         """

@@ -6,7 +6,6 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
-from swagger_server.models.data import Data  # noqa: F401,E501
 from swagger_server.models.solution import Solution  # noqa: F401,E501
 from swagger_server import util
 
@@ -17,16 +16,16 @@ class DataTrain(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, data: Data=None, solution: Solution=None):  # noqa: E501
+    def __init__(self, data: List[int]=None, solution: Solution=None):  # noqa: E501
         """DataTrain - a model defined in Swagger
 
         :param data: The data of this DataTrain.  # noqa: E501
-        :type data: Data
+        :type data: List[int]
         :param solution: The solution of this DataTrain.  # noqa: E501
         :type solution: Solution
         """
         self.swagger_types = {
-            'data': Data,
+            'data': List[int],
             'solution': Solution
         }
 
@@ -50,22 +49,22 @@ class DataTrain(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def data(self) -> Data:
+    def data(self) -> List[int]:
         """Gets the data of this DataTrain.
 
 
         :return: The data of this DataTrain.
-        :rtype: Data
+        :rtype: List[int]
         """
         return self._data
 
     @data.setter
-    def data(self, data: Data):
+    def data(self, data: List[int]):
         """Sets the data of this DataTrain.
 
 
         :param data: The data of this DataTrain.
-        :type data: Data
+        :type data: List[int]
         """
 
         self._data = data

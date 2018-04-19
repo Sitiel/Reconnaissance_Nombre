@@ -28,7 +28,7 @@ paths:
       - "Manage Training"
       summary: "Add a train data in database"
       description: "Add a train data in database\n"
-      operationId: "add_data_master_add_data_add_data"
+      operationId: "add_data"
       produces:
       - "application/json"
       parameters:
@@ -50,7 +50,7 @@ paths:
       - "TestData"
       summary: "Add a train data in database"
       description: "Add a train data in database\n"
-      operationId: "test_data_master_test_data_test_data"
+      operationId: "test_data"
       produces:
       - "application/json"
       parameters:
@@ -74,7 +74,7 @@ paths:
       - "GetData"
       summary: "Get Confusion Matrix of all Algorithms"
       description: "Get Confusion Matrix of all Algorithms\n"
-      operationId: "get_maxtrix_master_get_maxtrix_get_maxtrix"
+      operationId: "get_maxtrix"
       produces:
       - "application/json"
       parameters: []
@@ -92,7 +92,7 @@ paths:
       - "Manage Training"
       summary: "Get Confusion Matrix of all Algorithms"
       description: "Get Confusion Matrix of all Algorithms\n"
-      operationId: "start_train_master_start_train_start_train"
+      operationId: "start_train"
       produces:
       - "application/json"
       parameters: []
@@ -104,10 +104,29 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.manage_training_controller"
 definitions:
   data:
-    type: "array"
-    items:
-      type: "integer"
-    example: "[1,1,1,1,1,0,1,0,1,0,1,0,1,1,1]"
+    type: "object"
+    properties:
+      data:
+        type: "array"
+        items:
+          type: "integer"
+    example:
+      data:
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 0
+      - 1
+      - 0
+      - 1
+      - 0
+      - 1
+      - 0
+      - 1
+      - 1
+      - 1
   matrix:
     type: "array"
     items:
@@ -115,12 +134,14 @@ definitions:
     example: "[[1,1,1,1],[1,0,1,0],[1,0,1,0],[1,1,1,1]]"
   solution:
     type: "integer"
-    example: 1
+    example: "1"
   dataTrain:
     type: "object"
     properties:
       data:
-        $ref: "#/definitions/data"
+        type: "array"
+        items:
+          type: "integer"
       solution:
         $ref: "#/definitions/solution"
     example:

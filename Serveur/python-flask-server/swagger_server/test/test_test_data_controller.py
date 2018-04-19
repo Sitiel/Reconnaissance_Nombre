@@ -13,8 +13,8 @@ from swagger_server.test import BaseTestCase
 class TestTestDataController(BaseTestCase):
     """TestDataController integration test stubs"""
 
-    def test_test_data_master_test_data_test_data(self):
-        """Test case for test_data_master_test_data_test_data
+    def test_test_data(self):
+        """Test case for test_data
 
         Add a train data in database
         """
