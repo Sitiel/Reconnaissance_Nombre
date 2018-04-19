@@ -74,6 +74,10 @@ c.addEventListener('mouseup', function (event) {
 	down = false;
 }, false);
 
+c.addEventListener('mouseout', function (event) {
+	down = false;
+}, false);
+
 function draw() {
 	taille_i = 8;
 	taille_j = 6;
@@ -203,12 +207,30 @@ function getMatrix() {
         type: "get",
         contentType: "application/json",
         success: function(response){
-        	alert(response);
-            //Ajout dans la div #kvoisin
+            var id;
+            for(i=0;i<10;i++){
+            	id_k = '#'+response.data[1].method+'_ligne'+i;
+            	id_b = '#'+response.data[0].method+'_ligne'+i;
+            	id_n = '#'+response.data[2].method+'_ligne'+i;
+				$(id_k).empty();
+				$(id_b).empty();
+				$(id_n).empty();
+				$(id_k).append('<th scope="row">'+i+'</th>');
+				$(id_b).append('<th scope="row">'+i+'</th>');
+				$(id_n).append('<th scope="row">'+i+'</th>');
+				for(j=0; j<10; j++){
+					if (i==j){
+						$(id_k).append("<th class='ui-helper-green'>"+response.data[1].matrix[i][j]+"</th>");
+						$(id_b).append("<th class='ui-helper-green'>"+response.data[0].matrix[i][j]+"</th>");
+						$(id_n).append("<th class='ui-helper-green'>"+response.data[2].matrix[i][j]+"</th>");
+					}else{
+						$(id_k).append("<th>"+response.data[1].matrix[i][j]+"</th>");
+						$(id_b).append("<th>"+response.data[0].matrix[i][j]+"</th>");
+						$(id_n).append("<th>"+response.data[2].matrix[i][j]+"</th>");
+					}
+				}
 
-            //Ajout dans la div #bayesienne
-
-            //Ajout dans la div #neurones
+            }
         },
         error: function(jqXHR,textStatus,errorThrown){
         	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
@@ -228,3 +250,4 @@ function clearNumber() {
 }
 
 draw();
+getMatrix();

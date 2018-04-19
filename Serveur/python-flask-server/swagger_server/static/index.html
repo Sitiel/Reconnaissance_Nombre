@@ -59,20 +59,104 @@
                             <a class="nav-link" id="neurones-tab" data-toggle="tab" href="#neurones" role="tab" aria-controls="neurones" aria-selected="false">Neurones</a>
                         </li>
                     </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="kvoisin" role="tabpanel" aria-labelledby="kvoisin-tab">
-                                <!-- Ecriture d'une matrice sur les kvoisins en un tableau 9*9 -->
-                                J'AIME LE KVOISIN
-                            </div>
-                            <div class="tab-pane fade" id="bayesienne" role="tabpanel" aria-labelledby="bayesienne-tab">
-                                <!-- Ecriture d'une matrice sur la methode bayesienne en un tableau 9*9 -->
-                                J'AIME LE BAYESIEN
-                            </div>
-                            <div class="tab-pane fade" id="neurones" role="tabpanel" aria-labelledby="neurones-tab">
-                                <!-- Ecriture d'une matrice sur les neurones en un tableau 9*9 -->
-                                J'AIME LES NEURONES
-                            </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="kvoisin" role="tabpanel" aria-labelledby="kvoisin-tab">
+                            <!-- Ecriture d'une matrice sur les kvoisins en un tableau 9*9 -->
+                            <table class="table table-bordered ui-helper-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th scope="col">0</th>
+                                        <th scope="col">1</th>
+                                        <th scope="col">2</th>
+                                        <th scope="col">3</th>
+                                        <th scope="col">4</th>
+                                        <th scope="col">5</th>
+                                        <th scope="col">6</th>
+                                        <th scope="col">7</th>
+                                        <th scope="col">8</th>
+                                        <th scope="col">9</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="kmeans_ligne0"></tr>
+                                    <tr id="kmeans_ligne1"></tr>
+                                    <tr id="kmeans_ligne2"></tr>
+                                    <tr id="kmeans_ligne3"></tr>
+                                    <tr id="kmeans_ligne4"></tr>
+                                    <tr id="kmeans_ligne5"></tr>
+                                    <tr id="kmeans_ligne6"></tr>
+                                    <tr id="kmeans_ligne7"></tr>
+                                    <tr id="kmeans_ligne8"></tr>
+                                    <tr id="kmeans_ligne9"></tr>
+                                </tbody>
+                            </table>
                         </div>
+                        <div class="tab-pane fade" id="bayesienne" role="tabpanel" aria-labelledby="bayesienne-tab">
+                            <!-- Ecriture d'une matrice sur la methode bayesienne en un tableau 9*9 -->
+                            <table class="table table-bordered ui-helper-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th scope="col">0</th>
+                                        <th scope="col">1</th>
+                                        <th scope="col">2</th>
+                                        <th scope="col">3</th>
+                                        <th scope="col">4</th>
+                                        <th scope="col">5</th>
+                                        <th scope="col">6</th>
+                                        <th scope="col">7</th>
+                                        <th scope="col">8</th>
+                                        <th scope="col">9</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="baye_ligne0"></tr>
+                                    <tr id="baye_ligne1"></tr>
+                                    <tr id="baye_ligne2"></tr>
+                                    <tr id="baye_ligne3"></tr>
+                                    <tr id="baye_ligne4"></tr>
+                                    <tr id="baye_ligne5"></tr>
+                                    <tr id="baye_ligne6"></tr>
+                                    <tr id="baye_ligne7"></tr>
+                                    <tr id="baye_ligne8"></tr>
+                                    <tr id="baye_ligne9"></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="neurones" role="tabpanel" aria-labelledby="neurones-tab">
+                            <!-- Ecriture d'une matrice sur les neurones en un tableau 9*9 -->
+                            <table class="table table-bordered ui-helper-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th scope="col">0</th>
+                                        <th scope="col">1</th>
+                                        <th scope="col">2</th>
+                                        <th scope="col">3</th>
+                                        <th scope="col">4</th>
+                                        <th scope="col">5</th>
+                                        <th scope="col">6</th>
+                                        <th scope="col">7</th>
+                                        <th scope="col">8</th>
+                                        <th scope="col">9</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="neural_ligne0"></tr>
+                                    <tr id="neural_ligne1"></tr>
+                                    <tr id="neural_ligne2"></tr>
+                                    <tr id="neural_ligne3"></tr>
+                                    <tr id="neural_ligne4"></tr>
+                                    <tr id="neural_ligne5"></tr>
+                                    <tr id="neural_ligne6"></tr>
+                                    <tr id="neural_ligne7"></tr>
+                                    <tr id="neural_ligne8"></tr>
+                                    <tr id="neural_ligne9"></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
