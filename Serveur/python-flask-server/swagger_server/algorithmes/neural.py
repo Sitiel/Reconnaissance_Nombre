@@ -11,3 +11,10 @@ class NeuralNet:
             layerSize = outData if i == layersNB-1 else neurones
             for j in range(layerSize):
                 self.weights.append([1 for k in range(inData if i == 0 else neurones)])
+
+
+
+    def train(self, trainData):
+        print([len(l) for l in self.weights])
+
+
