@@ -139,7 +139,6 @@ function addToTrain() {
 
 function sendToDB() {
 	//Fonction avec un appel ajax qui va envoyer en AJAX au format JSON l'image dessinée et l'envoyer au serveur python
-    displayNumber();
     data = JSON.stringify({'data':number});
     $.ajax({
         url: "/test",
@@ -148,15 +147,19 @@ function sendToDB() {
         datatype:"json",
         data: data,
         success: function(response){
-            alert("Reçu");
             //mettre à jour les resultats
+            //kvoisin
+            $('#res_kvois').text(response.kmeans);
+            //bayesienne
+			$('#res_bayes').text(response.baye);
+            //neurones
+			$('#res_neuro').text(response.neural);
 
-
-            //Une fois les resultats reçus on mets a jour les matrices
+            //Une fois les resultats reçus on mets à jour les matrices
     		getMatrix();
         },
         error: function(jqXHR,textStatus,errorThrown){
-        	alert("ERROR");
+        	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
         	console.log('jqXHR:');
             console.log(jqXHR);
             console.log('textStatus:');
@@ -170,14 +173,18 @@ function sendToDB() {
 
 function getMatrix() {
 	$.ajax({
-        url: "localhost:8080/add",
-        type: "post",
+        url: "/getMatrix",
+        type: "get",
         contentType: "application/json; charset=utf-8",
         success: function(response){
-            alert("Reçu");
+            //Ajout dans la div #kvoisin
+
+            //Ajout dans la div #bayesienne
+
+            //Ajout dans la div #neurones
         },
         error: function(jqXHR,textStatus,errorThrown){
-        	alert("ERROR");
+        	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
         	console.log('jqXHR:');
             console.log(jqXHR);
             console.log('textStatus:');
