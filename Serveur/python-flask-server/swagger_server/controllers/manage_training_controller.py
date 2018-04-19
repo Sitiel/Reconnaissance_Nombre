@@ -4,6 +4,7 @@ import six
 from swagger_server.models.data_train import DataTrain  # noqa: E501
 from swagger_server import util
 
+trainData = []
 
 def add_data(dataTrain):  # noqa: E501
     """Add a train data in database
@@ -15,6 +16,9 @@ def add_data(dataTrain):  # noqa: E501
 
     :rtype: None
     """
+    trainData.append([dataTrain['data'], dataTrain['solution']])
+    print(trainData)
+
     if connexion.request.is_json:
         dataTrain = DataTrain.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
