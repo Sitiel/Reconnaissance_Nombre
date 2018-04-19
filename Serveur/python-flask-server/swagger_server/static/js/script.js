@@ -80,6 +80,9 @@ function draw() {
 
 	for (var i = 0; i < taille_i; i++) {
 		for (var j = 0; j < taille_j; j++) {
+			if(number[i * 6 + j] == null){
+				number[i * 6 + j] = -1;
+			}
 
 			if (number[i * 6 + j] === 1) {
 				ctx.fillStyle = "#000000";
@@ -102,18 +105,38 @@ function draw() {
 	}
 }
 
+function eraseNull(table){
+	var retour = table;
+	for (var i = 0; i < 8; i++) {
+		for (var j = 0; j < 6; j++) {
+			if(retour[i * 6 + j] == null){
+				retour[i * 6 + j] = -1;
+				console.log("Un null detecté en "+i+":"+j);
+			}
+		}
+	}
+	return retour;
+}
+
 function displayNumber() {
 	//alert("[" + number.toString() + "]");
 	alert(JSON.stringify(number));
 }
 
 function addToTrain() {
-	var chiffre = -1
+	var chiffre = -1;
+	number = eraseNull(number);
+	draw();
 	while(isNaN(chiffre) || (chiffre<0 || chiffre>9)){
 		chiffre = prompt("Quel chiffre avez vous écrit ?", 0);
+		if(chiffre == null){
+			return;
+		}
     	chiffre = parseInt(chiffre);
 	}
     var data = JSON.stringify({'data':number,'solution':chiffre});
+    number = eraseNull(number);
+	draw();
     console.log(data);
     $.ajax({
     	url: "/add",
@@ -139,44 +162,48 @@ function addToTrain() {
 
 function sendToDB() {
 	//Fonction avec un appel ajax qui va envoyer en AJAX au format JSON l'image dessinée et l'envoyer au serveur python
-    data = JSON.stringify({'data':number});
-    $.ajax({
-        url: "/test",
-        type: "post",
-        contentType: "application/json",
-        datatype:"json",
-        data: data,
-        success: function(response){
-            //mettre à jour les resultats
-            //kvoisin
-            $('#res_kvois').text(response.kmeans);
-            //bayesienne
+	number = eraseNull(number);
+	draw();
+	data = JSON.stringify({'data':number});
+	number = eraseNull(number);
+	draw();
+	$.ajax({
+	    url: "/test",
+	    type: "post",
+	    contentType: "application/json",
+	    datatype:"json",
+	    data: data,
+	    success: function(response){
+	        //mettre à jour les resultats
+	        //kvoisin
+	        $('#res_kvois').text(response.kmeans);
+	        //bayesienne
 			$('#res_bayes').text(response.baye);
-            //neurones
+	        //neurones
 			$('#res_neuro').text(response.neural);
 
-            //Une fois les resultats reçus on mets à jour les matrices
-    		getMatrix();
-        },
-        error: function(jqXHR,textStatus,errorThrown){
-        	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
-        	console.log('jqXHR:');
-            console.log(jqXHR);
-            console.log('textStatus:');
-            console.log(textStatus);
-            console.log('errorThrown:');
-            console.log(errorThrown);
-        }
-    });
-    
+	        //Une fois les resultats reçus on mets à jour les matrices
+			getMatrix();
+	    },
+	    error: function(jqXHR,textStatus,errorThrown){
+	    	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
+	    	console.log('jqXHR:');
+	        console.log(jqXHR);
+	        console.log('textStatus:');
+	        console.log(textStatus);
+	        console.log('errorThrown:');
+	        console.log(errorThrown);
+	    }
+	});
 }	
 
 function getMatrix() {
 	$.ajax({
         url: "/getMatrix",
         type: "get",
-        contentType: "application/json; charset=utf-8",
+        contentType: "application/json",
         success: function(response){
+        	alert(response);
             //Ajout dans la div #kvoisin
 
             //Ajout dans la div #bayesienne
