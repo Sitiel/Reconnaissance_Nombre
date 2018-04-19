@@ -19,7 +19,7 @@ def test_data(image):  # noqa: E501
     :rtype: Solution
     """
 
-    trainData = db.getAllTrainData()
+    trainData = db.getAllDataTrain()
 
     result = findUsingKMeans([t["data"] for t in trainData], [t["solution"] for t in trainData], image['data'],
                              swagger_server.algorithmes.utile.distValue)

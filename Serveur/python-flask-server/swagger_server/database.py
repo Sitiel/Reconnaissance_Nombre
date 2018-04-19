@@ -7,12 +7,34 @@ class Database:
     def __init__(self):
         client = MongoClient()
         client = MongoClient('localhost', 27017)
-        self.collection = client.Reconnaissance_Chiffre.get_collection("DataTrain")
+        self.dataTrain = client.Reconnaissance_Chiffre.get_collection("DataTrain")
+        self.confusionMatrix = client.Reconnaissance_Chiffre.get_collection("ConfusionMatrix")
+        self.dataTest = client.Reconnaissance_Chiffre.get_collection("DataTest")
 
-    def insertTrainData (self, data):
-        self.collection.insert(data)
+    def insertDataTrain (self, data):
+        self.dataTrain.insert(data)
     
-    def getAllTrainData(self):
-        return list(self.collection.find())
+    def getAllDataTrain(self):
+        return list(self.dataTrain.find())
+
+    def addMatrix(self, methodName, matrix):
+        result = self.confusionMatrix.find_one({"method":methodName})
+        self.confusionMatrix.insert({"method":methodName, "matrix":matrix}) if not result else self.confusionMatrix.find_and_modify({"method":methodName, "matrix":matrix}) 
+        return True
+
+    def getMatrix(self, methodName):
+        matrix = self.confusionMatrix.find_one({"method": methodName})
+        return matrix["matrix"]
+
+    def getAllMatrix(self):
+        return list(self.confusionMatrix.find())
+
+    def getAllDataTest(self):
+        return list(self.dataTest.find())
+
+    def ImportDataTest(self, datas):
+        #TO DO
+        print(datas)
+        
 
 db = Database()
