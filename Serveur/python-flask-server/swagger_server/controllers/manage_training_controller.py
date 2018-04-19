@@ -15,7 +15,7 @@ def add_data(dataTrain):  # noqa: E501
 
     :rtype: None
     """
-    db.add_data(dataTrain)
+    db.insertTrainData(dataTrain)
 
     if connexion.request.is_json:
         dataTrain = DataTrain.from_dict(connexion.request.get_json())  # noqa: E501

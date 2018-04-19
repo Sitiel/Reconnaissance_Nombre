@@ -7,7 +7,7 @@ class Database:
     def __init__(self):
         client = MongoClient()
         client = MongoClient('localhost', 27017)
-        self.collection = client.Reconaissance_Chiffre.get_collection("DataTrain")
+        self.collection = client.Reconnaissance_Chiffre.get_collection("DataTrain")
 
     def insertTrainData (self, data):
         self.collection.insert(data)
