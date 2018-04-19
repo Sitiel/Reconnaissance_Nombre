@@ -108,9 +108,11 @@ function displayNumber() {
 }
 
 function addToTrain() {
-
-    var chiffre = prompt("Quel chiffre avez vous écrit ?", 0);
-    chiffre = parseInt(chiffre);
+	var chiffre = -1
+	while(isNaN(chiffre) || (chiffre<0 || chiffre>9)){
+		chiffre = prompt("Quel chiffre avez vous écrit ?", 0);
+    	chiffre = parseInt(chiffre);
+	}
     var data = JSON.stringify({'data':number,'solution':chiffre});
     console.log(data);
     $.ajax({
