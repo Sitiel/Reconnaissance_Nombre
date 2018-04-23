@@ -27,8 +27,47 @@ def centrage(image2, image1, largeur, hauteur):
             return imageCourante
     return imageRet
 
+def centrage(image, largeur, hauteur):
+    hautGauche = [0 for i in range (largeur+hauteur)]
+    basDroite = [largeur+hauteur for i in range (largeur+hauteur)]
+    for k in range(len(image)):
+        if image[k] == 1 :
+            basDroite[k%largeur] = 0
+            basDroite[(int)(k/largeur)+largeur] = 0
+        else :
+            if basDroite[k%largeur] == largeur+hauteur :
+                hautGauche[k%largeur] += 1
+            else :
+                basDroite[k%largeur] += 1
+            if basDroite[(int)(k/largeur)+largeur] == largeur+hauteur :
+                hautGauche[(int)(k/largeur)+largeur] += 1
+            else :
+                basDroite[(int)(k/largeur)+largeur] += 1
 
-# direction correspond a un entier, 1 pour la droite, 2 pour le haut
+    haut = min(hautGauche[0:largeur])
+    gauche = min(hautGauche[largeur:-1])
+    bas = min(basDroite[0:largeur])
+    droite = min(basDroite[largeur:-1])
+
+    print("basDroite : ", basDroite," hautGauche : ", hautGauche)
+    print("haut : ",haut,"gauche : ",gauche,"bas : ",bas,"droite : ",droite)
+
+    bas = (int)(((bas - haut)/2 + hauteur) % hauteur)
+    gauche = (int)(((gauche - droite)/2 + largeur) % largeur)
+
+    print("bas : ",bas," gauche : ",gauche)
+
+    for i in range (bas) :
+        print("coucou")
+        image = deplacementImage (image, 2, largeur,hauteur)
+    for i in range (gauche) :
+        image = deplacementImage (image, 1, largeur,hauteur)
+
+    return image
+        
+ 
+
+# direction correspond a un entier, 1 pour la gauche, 2 pour le bas
 def deplacementImage(image, direction, largeur, hauteur):
     x = len(image)
     profondeur = 0
@@ -68,3 +107,10 @@ def distValue(image1, image2):
         if img[i] != image2[i]:
             retour += 1
     return retour
+
+def printImage(image,largeur,hauteur):
+    for i in range (hauteur):
+        a = ""
+        for j in range (largeur):
+            a += str(image[j+i*largeur])
+        print(a)

@@ -43,7 +43,7 @@ def recuitCalcul(variablesCount, evaluate):
 	currentBestValue = evaluate(current)
 
 	while(iteration<nbIterationMax):
-		i = random.randint(0,len(param)-1)
+		i = random.randint(0,len(current)-1)
 		changeOneParam(current,maxBorne,i)
 		currentValue = evaluate(current)
 		if currentValue < currentBestValue :
