@@ -201,7 +201,28 @@ function sendToDB() {
 	        console.log(errorThrown);
 	    }
 	});
-}	
+}
+
+function getColorScheme(num){
+	//KVOISIN
+	if(num > 75.0){
+		return "ui-helper-green";
+	}else if(num > 40.0){
+		return "ui-helper-orange";
+	}else{
+		return "ui-helper-red";
+	}
+}
+
+function getPercentage(num){
+	ret = 0
+	if(isNaN(num)){
+		return ret.toFixed(1);
+	}else{
+		return num.toFixed(1);
+	}
+}
+
 
 function getMatrix() {
 	$.ajax({
@@ -210,15 +231,33 @@ function getMatrix() {
         contentType: "application/json",
         success: function(response){
             var id;
+            var k_color;
+            var b_color;
+            var n_color;
+            //Diagonnal
             var totalCorrect = [0, 0, 0];
             var total = [0, 0, 0];
-            for(i=0;i<11;i++){
+            //Ligne
+            var totalColCorrect = [0, 0, 0];
+            var totalCol = [0, 0, 0];
+            //Colonne
+            var totalLigneCorrect = [];
+            var totalLigne = [];
+
+            for(i=0; i<10; i++){
+            	totalLigneCorrect[i] = [0, 0, 0];
+            	totalLigne[i] = [0, 0, 0];
+            }
+
+            for(i=0;i<11;i++){//Ligne
             	id_k = '#'+response.data[1].method+'_ligne'+i;
             	id_b = '#'+response.data[0].method+'_ligne'+i;
             	id_n = '#'+response.data[2].method+'_ligne'+i;
+            	//On vide les matrices de confusion
 				$(id_k).empty();
 				$(id_b).empty();
 				$(id_n).empty();
+				//Colonne&Ligne pourcentage
 				if (i == 10){
 					$(id_k).append('<th scope="row">percent</th>');
 					$(id_b).append('<th scope="row">percent</th>');
@@ -229,33 +268,71 @@ function getMatrix() {
 					$(id_b).append('<th scope="row">' + i + '</th>');
 					$(id_n).append('<th scope="row">' + i + '</th>');
 				}
-				for(j=0; j<11; j++){
-					if(i == 10 || j == 10){
 
+				for(j=0; j<11; j++){//Colonne
+					//Colonne&Ligne sur les pourcentages
+					if(i == 10 || j == 10){
 						if(i == j){
-							var k = totalCorrect[1]/total[1];
-							var b = totalCorrect[0]/total[0];
-							var n = totalCorrect[2]/total[2];
-							$(id_k).append("<th class='ui-helper-green'>" + k + "</th>");
-							$(id_b).append("<th class='ui-helper-green'>" + b + "</th>");
-							$(id_n).append("<th class='ui-helper-green'>" + n + "</th>");
+							var k = (totalCorrect[1]/total[1])*100;
+							var b = (totalCorrect[0]/total[0])*100;
+							var n = (totalCorrect[2]/total[2])*100;
+							$(id_k).append("<th class='"+getColorScheme(getPercentage(k))+"'>" + getPercentage(k) + "</th>");
+							$(id_b).append("<th class='"+getColorScheme(getPercentage(b))+"'>" + getPercentage(b) + "</th>");
+							$(id_n).append("<th class='"+getColorScheme(getPercentage(n))+"'>" + getPercentage(n) + "</th>");
 						}
-						else{
-							$(id_k).append("<th class='ui-helper-green'></th>");
-							$(id_b).append("<th class='ui-helper-green'></th>");
-							$(id_n).append("<th class='ui-helper-green'></th>");
+						else if(j == 10){
+							var k = (totalColCorrect[1]/totalCol[1])*100;
+							var b = (totalColCorrect[0]/totalCol[0])*100;
+							var n = (totalColCorrect[2]/totalCol[2])*100;
+							$(id_k).append("<th class='"+getColorScheme(getPercentage(k))+"'>" + getPercentage(k) + "</th>");
+							$(id_b).append("<th class='"+getColorScheme(getPercentage(b))+"'>" + getPercentage(b) + "</th>");
+							$(id_n).append("<th class='"+getColorScheme(getPercentage(n))+"'>" + getPercentage(n) + "</th>");
+
+							//Retour a zero pour une nouvelle ligne
+							totalCol[0] = 0;//Total Bayesienne
+							totalCol[1] = 0;//Total KVoisin
+							totalCol[2] = 0;//Total Neural
+							totalColCorrect[0] = 0;//Total Bayesienne
+							totalColCorrect[1] = 0;//Total KVoisin
+							totalColCorrect[2] = 0;//Total Neural
+
+						}else{
+							var k = (totalLigneCorrect[j][1]/totalLigne[j][1])*100;
+							var b = (totalLigneCorrect[j][0]/totalLigne[j][0])*100;
+							var n = (totalLigneCorrect[j][2]/totalLigne[j][2])*100;
+							$(id_k).append("<th class='"+getColorScheme(getPercentage(k))+"'>" + getPercentage(k) + "</th>");
+							$(id_b).append("<th class='"+getColorScheme(getPercentage(b))+"'>" + getPercentage(b) + "</th>");
+							$(id_n).append("<th class='"+getColorScheme(getPercentage(n))+"'>" + getPercentage(n) + "</th>");
 						}
 						continue;
 					}
 
-					total[0] += response.data[0].matrix[i][j];
-					total[1] += response.data[1].matrix[i][j];
-					total[2] += response.data[2].matrix[i][j];
+					//Colonne
+					totalCol[0] += response.data[0].matrix[i][j];//Total Bayesienne
+					totalCol[1] += response.data[1].matrix[i][j];//Total KVoisin
+					totalCol[2] += response.data[2].matrix[i][j];//Total Neural
+					//Ligne
+					totalLigne[j][0] += response.data[0].matrix[i][j];
+					totalLigne[j][1] += response.data[1].matrix[i][j];
+					totalLigne[j][2] += response.data[2].matrix[i][j];
+					//Diag
+					total[0] += response.data[0].matrix[i][j];//Total Bayesienne
+					total[1] += response.data[1].matrix[i][j];//Total KVoisin
+					total[2] += response.data[2].matrix[i][j];//Total Neural
 
 					if (i==j){
 						$(id_k).append("<th class='ui-helper-green'>"+response.data[1].matrix[i][j]+"</th>");
 						$(id_b).append("<th class='ui-helper-green'>"+response.data[0].matrix[i][j]+"</th>");
 						$(id_n).append("<th class='ui-helper-green'>"+response.data[2].matrix[i][j]+"</th>");
+						//Ligne
+						totalColCorrect[0] += response.data[0].matrix[i][j];
+						totalColCorrect[1] += response.data[1].matrix[i][j];
+						totalColCorrect[2] += response.data[2].matrix[i][j];
+						//Ligne
+						totalLigneCorrect[j][0] += response.data[0].matrix[i][j];
+						totalLigneCorrect[j][1] += response.data[1].matrix[i][j];
+						totalLigneCorrect[j][2] += response.data[2].matrix[i][j];
+						//Diag
 						totalCorrect[0] += response.data[0].matrix[i][j];
 						totalCorrect[1] += response.data[1].matrix[i][j];
 						totalCorrect[2] += response.data[2].matrix[i][j];
@@ -265,6 +342,7 @@ function getMatrix() {
 						$(id_n).append("<th>"+response.data[2].matrix[i][j]+"</th>");
 					}
 				}
+
             }
 
         },
@@ -278,6 +356,34 @@ function getMatrix() {
             console.log(errorThrown);
         }
     });
+}
+
+
+function startTrain() {
+	$('#loading').modal('toggle');
+	$.ajax({
+	    url: "/startTrain",
+	    type: "post",
+	    success: function(response){
+	    	getMatrix();
+	    	$('#loading').modal('toggle');
+	    	/*
+	    	$("#loading").attr('class', 'modal fade')
+			$("#loading").css("display", "none");
+			$("#main").last().remove();*/
+	    },
+	    error: function(jqXHR,textStatus,errorThrown){
+	    	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
+	    	console.log('jqXHR:');
+	        console.log(jqXHR);
+	        console.log('textStatus:');
+	        console.log(textStatus);
+	        console.log('errorThrown:');
+	        console.log(errorThrown);
+
+	        $('#loading').modal('toggle');
+	    }
+	});
 }
 
 function clearNumber() {
