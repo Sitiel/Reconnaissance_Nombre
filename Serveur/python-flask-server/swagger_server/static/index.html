@@ -13,8 +13,17 @@
         <title>Apprentissage.io</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body id="main">
         <h1 id="title" class="text-center">Apprentissage</h1>
+        
+        <!-- Modal -->
+        <div class="modal fade container" id="loading" role="dialog">
+            <div class="modal-dialog row h-100 justify-content-center align-items-center">
+                <div class="col-12 text-center">
+                    <img src="css/ajax-loader.gif" alt="load"> 
+                </div>
+            </div>
+        </div>
         <div id="page" class="row">
             <!-- La div contenant les blocs pour le dessin d'un chiffre -->
             <div id="div_dessin" class="col-4">
@@ -24,7 +33,9 @@
                 <div id="boutons_dessin">
                     <button class="btn btn-primary btn-block" onclick="addToTrain()">Add to train</button>
                     <button class="btn btn-primary btn-block" onclick="sendToDB()">Try to guess</button>
+                    <button class="btn btn-primary btn-block" onclick="startTrain()">Start the Training</button>
                     <button class="btn btn-primary btn-block" onclick="clearNumber()">Clear</button>
+
                 </div>
             </div>
             <!-- La div contenant les blocs pour l'affichage du resultat -->
