@@ -1,3 +1,7 @@
+//Modal
+
+
+//Calcul
 number = new Array(6 * 8);
 number.fill(-1, 0);
 
@@ -360,7 +364,10 @@ function getMatrix() {
 
 
 function startTrain() {
-	$('#loading').modal('toggle');
+	$('#loading').modal({
+	    backdrop: 'static',
+	    keyboard: false
+	});
 	$.ajax({
 	    url: "/startTrain",
 	    type: "post",
