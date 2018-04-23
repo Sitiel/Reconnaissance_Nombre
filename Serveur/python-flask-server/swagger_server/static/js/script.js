@@ -62,6 +62,8 @@ c.addEventListener('mousemove', function (event) {
 		canvasX = event.pageX - totalOffsetX;
 		canvasY = event.pageY - totalOffsetY;
 
+		if (parseInt(canvasX / realWidth) + parseInt(canvasY / realHeight) * 6 >= 8*6)
+			return;
 		number[parseInt(canvasX / realWidth) + parseInt(canvasY / realHeight) * 6] = 1;
 		var i                                                                      = parseInt(canvasY / realHeight);
 		var j                                                                      = parseInt(canvasX / realWidth);
@@ -208,29 +210,63 @@ function getMatrix() {
         contentType: "application/json",
         success: function(response){
             var id;
-            for(i=0;i<10;i++){
+            var totalCorrect = [0, 0, 0];
+            var total = [0, 0, 0];
+            for(i=0;i<11;i++){
             	id_k = '#'+response.data[1].method+'_ligne'+i;
             	id_b = '#'+response.data[0].method+'_ligne'+i;
             	id_n = '#'+response.data[2].method+'_ligne'+i;
 				$(id_k).empty();
 				$(id_b).empty();
 				$(id_n).empty();
-				$(id_k).append('<th scope="row">'+i+'</th>');
-				$(id_b).append('<th scope="row">'+i+'</th>');
-				$(id_n).append('<th scope="row">'+i+'</th>');
-				for(j=0; j<10; j++){
+				if (i == 10){
+					$(id_k).append('<th scope="row">percent</th>');
+					$(id_b).append('<th scope="row">percent</th>');
+					$(id_n).append('<th scope="row">percent</th>');
+				}
+				else {
+					$(id_k).append('<th scope="row">' + i + '</th>');
+					$(id_b).append('<th scope="row">' + i + '</th>');
+					$(id_n).append('<th scope="row">' + i + '</th>');
+				}
+				for(j=0; j<11; j++){
+					if(i == 10 || j == 10){
+
+						if(i == j){
+							var k = totalCorrect[1]/total[1];
+							var b = totalCorrect[0]/total[0];
+							var n = totalCorrect[2]/total[2];
+							$(id_k).append("<th class='ui-helper-green'>" + k + "</th>");
+							$(id_b).append("<th class='ui-helper-green'>" + b + "</th>");
+							$(id_n).append("<th class='ui-helper-green'>" + n + "</th>");
+						}
+						else{
+							$(id_k).append("<th class='ui-helper-green'></th>");
+							$(id_b).append("<th class='ui-helper-green'></th>");
+							$(id_n).append("<th class='ui-helper-green'></th>");
+						}
+						continue;
+					}
+
+					total[0] += response.data[0].matrix[i][j];
+					total[1] += response.data[1].matrix[i][j];
+					total[2] += response.data[2].matrix[i][j];
+
 					if (i==j){
 						$(id_k).append("<th class='ui-helper-green'>"+response.data[1].matrix[i][j]+"</th>");
 						$(id_b).append("<th class='ui-helper-green'>"+response.data[0].matrix[i][j]+"</th>");
 						$(id_n).append("<th class='ui-helper-green'>"+response.data[2].matrix[i][j]+"</th>");
+						totalCorrect[0] += response.data[0].matrix[i][j];
+						totalCorrect[1] += response.data[1].matrix[i][j];
+						totalCorrect[2] += response.data[2].matrix[i][j];
 					}else{
 						$(id_k).append("<th>"+response.data[1].matrix[i][j]+"</th>");
 						$(id_b).append("<th>"+response.data[0].matrix[i][j]+"</th>");
 						$(id_n).append("<th>"+response.data[2].matrix[i][j]+"</th>");
 					}
 				}
-
             }
+
         },
         error: function(jqXHR,textStatus,errorThrown){
         	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
