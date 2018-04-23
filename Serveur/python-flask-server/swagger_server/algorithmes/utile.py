@@ -27,7 +27,7 @@ def centrage(image2, image1, largeur, hauteur):
             return imageCourante
     return imageRet
 
-def centrage(image, largeur, hauteur):
+def centrageSolo(image, largeur, hauteur):
     hautGauche = [0 for i in range (largeur+hauteur)]
     basDroite = [largeur+hauteur for i in range (largeur+hauteur)]
     for k in range(len(image)):

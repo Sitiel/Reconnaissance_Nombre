@@ -1,6 +1,6 @@
 import math
 
-from database import db
+from swagger_server.database import db
 import random
 
 def moyenne(listImage):
@@ -56,10 +56,11 @@ def evaluateur(data, solutions, toFind):
             bestPercent = currentPercent
             number = k
     return number
+    
+            
 
-def trainBaye (data, solutions):
-    global possibilities
-    global classifieur
+
+def findUsingBaye(data, solutions, toFind):
     possibilities = 10
     classifieur = [[] for i in range(possibilities)]
     for i in range(possibilities):
@@ -68,21 +69,10 @@ def trainBaye (data, solutions):
             moy = sum([x[j] for x in currentData]) / len(currentData)
             ecartttype = math.sqrt(sum([(x[j] - moy) * (x[j] - moy) for x in currentData]) / len(currentData))
             classifieur[i] += [moy, ecartttype]
-
-
-def findUsingBaye(toFind, hyperparameters):
-    global possibilities
-    global classifieur
+    
 
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
         for j in range(len(toFind)):
-            proba[i] *= loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]) * hyperparameters[j]
+            proba[i] *= loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]) 
     return proba.index(max(proba))
-
-tmp = db.getAllDataTrain()
-random.shuffle(tmp)
-testData = tmp[:int(0.75*len(tmp))]
-for i in range(10):
-    print(i, ":", len([x for x in testData if x["solution"] == i]))
-trainBaye([t["data"] for t in tmp], [t["solution"] for t in tmp])
