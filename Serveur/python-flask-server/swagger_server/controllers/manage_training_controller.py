@@ -59,10 +59,11 @@ def start_train():  # noqa: E501
                 continue
             data.append(list(map(int, row[1:])))
 
-    n = NeuralNet(4, 4, 10, 1, 0.1)
+    n = NeuralNet(4, 4, 10, 1, 0.8)
     random.shuffle(data)
     for i in range(10000):
         print("Epoch :", i)
+        # random.shuffle(data)
         n.train([t[:4] for t in data], [int(t[4])-1 for t in data])
 
 
