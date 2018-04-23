@@ -22,18 +22,18 @@ def tabouCalcul(variablesCount, evaluate):
 
     ltabou = [[] for i in range(ltabouSize)]
 
-    current = [0 for i in range(variablesCount)]
+    current = [1 for i in range(variablesCount)]
 
     notProgressing = 0
     a = 0
-    maxBorne = 3000
+    maxBorne = 100
 
     currentBest = current
     currentBestValue = -9999999999
 
     while(notProgressing < 100):
         lVoisins = []
-        while len(lVoisins) < 10:
+        while len(lVoisins) < 100:
             v = copy.deepcopy(current)
             r = random.randint(0, len(v)-1)
             v[r] = random.randint(0, maxBorne)
@@ -51,20 +51,13 @@ def tabouCalcul(variablesCount, evaluate):
         ltabou[a] = current
         a += 1
         a = a % ltabouSize
+        print("currentBestValue:", currentBestValue)
 
         if best > currentBestValue:
+            print("best:",best)
             notProgressing = 0
             currentBestValue = best
             currentBest = newCurrent
         notProgressing += 1
     print("Current best :", currentBest, "with", currentBestValue)
     return
-
-
-
-
-
-def ev(a):
-    return -abs(sum(a)-1500)
-
-tabouCalcul(10, ev)

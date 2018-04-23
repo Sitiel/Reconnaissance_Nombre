@@ -1,5 +1,7 @@
 import math
 
+from database import db
+import random
 
 def moyenne(listImage):
     listRetour = []
@@ -47,16 +49,17 @@ def evaluateur(data, solutions, toFind):
         currentPercent = -1
         for j in range(len(dataMoyenne[0])):
             if dataEcarType[k][j] == 0:
-                currentPercent += loiNormale(toFind[j], dataMoyenne[k][j], 1)
+                currentPercent *= loiNormale(toFind[j], dataMoyenne[k][j], 1)
             else:
-                currentPercent += loiNormale(toFind[j], dataMoyenne[k][j], dataEcarType[k][j])
+                currentPercent *= loiNormale(toFind[j], dataMoyenne[k][j], dataEcarType[k][j])
         if currentPercent > bestPercent:
             bestPercent = currentPercent
             number = k
     return number
 
-
-def findUsingBaye(data, solutions, toFind):
+def trainBaye (data, solutions):
+    global possibilities
+    global classifieur
     possibilities = 10
     classifieur = [[] for i in range(possibilities)]
     for i in range(possibilities):
@@ -66,10 +69,20 @@ def findUsingBaye(data, solutions, toFind):
             ecartttype = math.sqrt(sum([(x[j] - moy) * (x[j] - moy) for x in currentData]) / len(currentData))
             classifieur[i] += [moy, ecartttype]
 
+
+def findUsingBaye(toFind, hyperparameters):
+    global possibilities
+    global classifieur
+
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
         for j in range(len(toFind)):
-            proba[i] *= loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1])
-
-    print(proba)
+            proba[i] *= loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]) * hyperparameters[j]
     return proba.index(max(proba))
+
+tmp = db.getAllDataTrain()
+random.shuffle(tmp)
+testData = tmp[:int(0.75*len(tmp))]
+for i in range(10):
+    print(i, ":", len([x for x in testData if x["solution"] == i]))
+trainBaye([t["data"] for t in tmp], [t["solution"] for t in tmp])
