@@ -41,8 +41,13 @@ class Database:
         result = self.confusionMatrix.find_one({"method": methodName})
         self.confusionMatrix.insert(
             {"method": methodName, "matrix": matrix}) if not result else self.confusionMatrix.find_and_modify(
-            {"method": methodName, "matrix": matrix})
+            {"method": methodName}, {"method": methodName, "matrix": matrix})
         return True
+
+    def removeMatrices(self):
+        result = self.confusionMatrix.findOneAndDelete({"method": "kmeans"})
+        result = self.confusionMatrix.findOneAndDelete({"method": "bayesienne"})
+        result = self.confusionMatrix.findOneAndDelete({"method": "neural"})
 
     def getMatrix(self, methodName):
         matrix = self.confusionMatrix.find_one({"method": methodName})
