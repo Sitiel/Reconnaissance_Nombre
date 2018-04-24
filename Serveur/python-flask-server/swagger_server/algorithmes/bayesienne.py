@@ -1,6 +1,5 @@
+#Bayesienne
 import math
-
-from swagger_server.database import db
 import random
 
 def moyenne(listImage):
@@ -56,11 +55,13 @@ def evaluateur(data, solutions, toFind):
             bestPercent = currentPercent
             number = k
     return number
-    
-            
 
+possibilities = 0
+classifieur = []
 
-def findUsingBaye(data, solutions, toFind):
+def trainBaye (data, solutions):
+    global possibilities
+    global classifieur
     possibilities = 10
     classifieur = [[] for i in range(possibilities)]
     for i in range(possibilities):
@@ -69,10 +70,15 @@ def findUsingBaye(data, solutions, toFind):
             moy = sum([x[j] for x in currentData]) / len(currentData)
             ecartttype = math.sqrt(sum([(x[j] - moy) * (x[j] - moy) for x in currentData]) / len(currentData))
             classifieur[i] += [moy, ecartttype]
-    
+
+
+def findUsingBaye(toFind, hyperparameters):
+    global possibilities
+    global classifieur
 
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
         for j in range(len(toFind)):
-            proba[i] *= loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]) 
+            proba[i] *= pow(loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]), hyperparameters[j])
+
     return proba.index(max(proba))

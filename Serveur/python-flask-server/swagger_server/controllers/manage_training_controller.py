@@ -5,7 +5,7 @@ from swagger_server import util
 
 from swagger_server.database import db
 from swagger_server.algorithmes.kmeans import findUsingKMeans
-from swagger_server.algorithmes.bayesienne import findUsingBaye
+from swagger_server.algorithmes.bayesienne import findUsingBaye, trainBaye
 from swagger_server.algorithmes.neural import NeuralNet
 
 import swagger_server.algorithmes.utile
@@ -77,6 +77,9 @@ def start_train():  # noqa: E501
 
     data = []
 
+    tmp = db.getAllDataTrain()
+    trainBaye([t['data'] for t in tmp], [t["solution"] for t in tmp])
+
     with open('data.csv', 'r') as csvfile:
         i = 0
         s = csv.reader(csvfile, delimiter=';', quotechar='|')
@@ -94,12 +97,14 @@ def start_train():  # noqa: E501
     #    n.train([t[:4] for t in data], [int(t[4])-1 for t in data])
 
 
+
+
     for test in testData:
         resultK = findUsingKMeans([t["data"] for t in trainData], [t["solution"] for t in trainData], test['data'],
                              swagger_server.algorithmes.utile.distValue)
 
 
-        resultB = findUsingBaye([t["data"] for t in trainData], [t["solution"] for t in trainData], test['data'])
+        resultB = findUsingBaye(test['data'],  [-9, 31, 3, -6, -1, -10, 1, -10, -2, 4, 2, -8, -5, 47, 3, 31, 0, -9, 0, 0, 3, 43, 41, -1, 3, 16, 88, 10, -6, -5, -2, 20, 17, 45, 38, 4, 2, 44, 33, -1, -8, -4, 9, -2, -6, 19, 0, 2])
 
      #   resultN = n.guess(test['data'])
 
