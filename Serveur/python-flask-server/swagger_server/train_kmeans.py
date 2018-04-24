@@ -14,12 +14,12 @@ def evaluateKmeans(hyperparameters):
     global trainSolutions
     succes = 0
     for data in testData:
-        find = findUsingKMeans(trainData, trainSolutions, data["data"], distValue)
+        find = findUsingKMeans(trainData, trainSolutions, data["data"], distValue, hyperparameters)
         succes += 1 if find == int(data["solution"]) else 0
     return succes
 
 def trainKmeans():
-    tabouCalcul(48, evaluateKmeans)
+    tabouCalcul(49, evaluateKmeans)
 
 
 testData = db.getAllDataTest()

@@ -39,7 +39,7 @@ def tabouCalcul(variablesCount, evaluate):
 
         cmp = 0
 
-        while cmp < 20:
+        while cmp < 50:
             r = random.randint(0, len(current)-1)
             was = current[r]
             current[r] = random.randint(minBorne, maxBorne)
@@ -64,7 +64,7 @@ def tabouCalcul(variablesCount, evaluate):
             currentBestValue = best
             currentBest = newCurrent
         if notProgressing > 100 and notProgressing%100 == 0:
-            current = [1 for i in range(variablesCount)]
+            current = currentBest
             print("Reset !")
         notProgressing += 1
     print("Current best :", currentBest, "with", currentBestValue)
