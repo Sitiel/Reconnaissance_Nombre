@@ -429,5 +429,31 @@ function clearMatrices() {
 }*/
 
 
+
+///FUN///
+(function makeDiv(){
+    // vary size for fun
+    var divsize = ((Math.random()*100) + 50).toFixed();
+    var color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
+    $newdiv = $('<img src="css/bounce.gif" alt="load">').css({
+        'width':divsize+'px',
+        'height':divsize+'px'
+    });
+
+    // make position sensitive to size and document's width
+    var posx = (Math.random() * ($(document).width() - divsize)).toFixed();
+    var posy = (Math.random() * ($(document).height() - divsize)).toFixed();
+
+    $newdiv.css({
+        'position':'absolute',
+        'left':posx+'px',
+        'top':posy+'px',
+        'display':'none'
+    }).appendTo( 'body' ).fadeIn(100).delay(1000).fadeOut(500, function(){
+      $(this).remove();
+      makeDiv(); 
+    }); 
+})();
+
 draw();
 getMatrix();
