@@ -394,10 +394,6 @@ function startTrain() {
 	    success: function(response){
 	    	getMatrix();
 	    	$('#loading').modal('toggle');
-	    	/*
-	    	$("#loading").attr('class', 'modal fade')
-			$("#loading").css("display", "none");
-			$("#main").last().remove();*/
 	    },
 	    error: function(jqXHR,textStatus,errorThrown){
 	    	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
@@ -412,6 +408,26 @@ function startTrain() {
 	    }
 	});
 }
+/*
+function clearMatrices() {
+	$.ajax({
+	    url: "/clearMatrix",
+	    type: "post",
+	    success: function(response){
+	    	getMatrix();
+	    },
+	    error: function(jqXHR,textStatus,errorThrown){
+	    	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
+	    	console.log('jqXHR:');
+	        console.log(jqXHR);
+	        console.log('textStatus:');
+	        console.log(textStatus);
+	        console.log('errorThrown:');
+	        console.log(errorThrown);
+	    }
+	});
+}*/
+
 
 draw();
 getMatrix();
