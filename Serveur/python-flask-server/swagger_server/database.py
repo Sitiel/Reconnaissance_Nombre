@@ -109,4 +109,3 @@ class Database:
         return res["poids"]
         
 db = Database()
-print(db.getPoids())
