@@ -103,6 +103,10 @@ class Database:
         return True
 
     def getPoids(self):
-        return self.poids.find_one()["poids"]
+        res = self.poids.find_one()
+        if res == None:
+            return None
+        return res["poids"]
         
 db = Database()
+print(db.getPoids())
