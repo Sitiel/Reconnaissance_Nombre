@@ -19,6 +19,6 @@ def trainBayesienne():
     tabouCalcul(48, evaluateBayesienne)
 
 
-testData = db.getAllDataTest()
+testData = db.getAllDataTest() + db.getAllDataTrain()
 random.shuffle(testData)
 trainBayesienne()
