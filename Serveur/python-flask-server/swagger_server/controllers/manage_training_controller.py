@@ -119,3 +119,4 @@ def start_train():  # noqa: E501
 
 def reset_matrix():
     db.removeMatrix()
+    return 'success'
