@@ -86,10 +86,10 @@ def start_train():  # noqa: E501
 
 
 
-    n = NeuralNet(48, 10, 30, 1, 0.8)
+    n = NeuralNet(48, 10, 30, 2, 0.1)
     for i in range(100):
         print("Epoch :", i)
-        n.train([t["data"] for t in trainData], [t["solution"] for t in trainData])
+        n.train([centrageSolo(t["data"], 6, 8) for t in trainData], [t["solution"] for t in trainData])
 
     for test in testData:
         resultK = findUsingKMeans([t["data"] for t in trainData], [t["solution"] for t in trainData], test['data'],
@@ -101,7 +101,7 @@ def start_train():  # noqa: E501
                                  -19, -5, 50, 11, 36, 7, 14, 3, -13, 34, 34, 20, -8, 6, 18, 15, 26, 13, 11, 4, 17, 9,
                                  34, -4, 1, 2])
 
-        resultN = n.guess(test['data'])
+        resultN = n.guess(centrageSolo(test['data'], 6, 8))
 
 
         s = int(test["solution"])

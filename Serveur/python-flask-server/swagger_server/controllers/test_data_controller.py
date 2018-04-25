@@ -34,8 +34,8 @@ def test_data(image):  # noqa: E501
                              -19, -5, 50, 11, 36, 7, 14, 3, -13, 34, 34, 20, -8, 6, 18, 15, 26, 13, 11, 4, 17, 9, 34,
                              -4, 1, 2])
 
-    n = NeuralNet(48, 10, 30, 1, 0.8)
-    resultN = n.guess(image['data'])
+    n = NeuralNet(48, 10, 30, 2, 0.1)
+    resultN = n.guess(swagger_server.algorithmes.utile.centrageSolo(image['data'],6, 8))
 
     if connexion.request.is_json:
         image = Data.from_dict(connexion.request.get_json())  # noqa: E501

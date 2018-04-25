@@ -12,11 +12,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="neural.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="neural.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state relative-caret-position="162">
+              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -47,9 +47,12 @@
       <file leaf-file-name="database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="97" column="17" lean-forward="false" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="450">
+              <caret line="32" column="72" lean-forward="false" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="72" />
+              <folding>
+                <marker date="1524657564510" expanded="true" signature="717:3892" ph="..." />
+                <marker date="1524657564510" expanded="true" signature="3881:3892" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,8 +106,8 @@
       <file leaf-file-name="manage_training_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/manage_training_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="719">
-              <caret line="58" column="22" lean-forward="false" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
+            <state relative-caret-position="0">
+              <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -112,11 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_data_controller.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_data_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/test_data_controller.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
-              <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+              <caret line="36" column="31" lean-forward="false" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -148,9 +151,9 @@
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/tabou.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/kmeans.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/utile.py" />
+        <option value="$PROJECT_DIR$/python-flask-server/swagger_server/controllers/test_data_controller.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/controllers/manage_training_controller.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural.py" />
-        <option value="$PROJECT_DIR$/python-flask-server/swagger_server/controllers/test_data_controller.py" />
       </list>
     </option>
   </component>
@@ -812,13 +815,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural.py">
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/kmeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="49" lean-forward="false" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -830,20 +831,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/database.py">
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/get_data_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="97" column="17" lean-forward="false" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="17" />
+        <state relative-caret-position="210">
+          <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/train_baye.py">
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/test_data_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="15" lean-forward="true" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+        <state relative-caret-position="440">
+          <caret line="36" column="31" lean-forward="false" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="32" column="72" lean-forward="false" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="72" />
+          <folding>
+            <marker date="1524657564510" expanded="true" signature="717:3892" ph="..." />
+            <marker date="1524657564510" expanded="true" signature="3881:3892" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/manage_training_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -868,38 +890,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/kmeans.py">
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/train_baye.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="49" lean-forward="false" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/manage_training_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="719">
-          <caret line="58" column="22" lean-forward="false" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
+        <state relative-caret-position="255">
+          <caret line="17" column="15" lean-forward="true" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
           <folding>
-            <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/get_data_controller.py">
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/test_data_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+        <state relative-caret-position="162">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
-            <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

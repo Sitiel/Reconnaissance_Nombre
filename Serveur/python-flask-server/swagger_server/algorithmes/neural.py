@@ -12,12 +12,14 @@ class NeuralNet:
         self.neurones = neurones
         self.layersNB = layersNB
         self.learningRate = learningRate
-        #self.weights = []
+        # self.weights = []
         self.weights = db.getPoids()
+        if self.weights is None or len(self.weights) != layersNB+1:
+            self.reset()
 
 
     def reset(self):
-
+        self.weights = []
         for i in range(self.layersNB):
             layer = []
             for j in range(self.neurones):
