@@ -408,10 +408,11 @@ function startTrain() {
 	    }
 	});
 }
-/*
+
+
 function clearMatrices() {
 	$.ajax({
-	    url: "/clearMatrix",
+	    url: "/resetMatrix",
 	    type: "post",
 	    success: function(response){
 	    	getMatrix();
@@ -426,34 +427,11 @@ function clearMatrices() {
 	        console.log(errorThrown);
 	    }
 	});
-}*/
+}
 
 
 
 ///FUN///
-/*(function makeDiv(){
-    // vary size for fun
-    var divsize = ((Math.random()*100) + 50).toFixed();
-    var color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
-    $newdiv = $('<img src="css/bounce.gif" alt="load">').css({
-        'width':divsize+'px',
-        'height':divsize+'px'
-    });
-
-    // make position sensitive to size and document's width
-    var posx = (Math.random() * ($(document).width() - divsize)).toFixed();
-    var posy = (Math.random() * ($(document).height() - divsize)).toFixed();
-
-    $newdiv.css({
-        'position':'absolute',
-        'left':posx+'px',
-        'top':posy+'px',
-        'display':'none'
-    }).appendTo( 'body' ).fadeIn(100).delay(1000).fadeOut(500, function(){
-      $(this).remove();
-      makeDiv(); 
-    }); 
-})();*/
 
 function makeDiv(img){
     // vary size for fun
@@ -479,12 +457,16 @@ function makeDiv(img){
     }); 
 }
 
-var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+
+var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+var image = [1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4];
 n = 0;
 $(document).keydown(function (e) {
     if (e.keyCode === k[n++]) {
         if (n === k.length) {
-            makeDiv("css/bounce.gif"); // à remplacer par votre code
+        	//creer un random et choisir une des images gif pour le makeDiv
+
+            makeDiv('css/bounce'+image[Math.floor(Math.random() * image.length)]+'.gif'); // à remplacer par votre code
             n = 0;
             return false;
         }
