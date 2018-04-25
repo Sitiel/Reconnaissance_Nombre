@@ -7,6 +7,7 @@ from swagger_server.database import db
 from swagger_server.algorithmes.kmeans import findUsingKMeans
 from swagger_server.algorithmes.bayesienne import findUsingBaye, trainBaye
 from swagger_server.algorithmes.neural import NeuralNet
+from swagger_server.algorithmes.utile import centrageSolo
 
 import swagger_server.algorithmes.utile
 
@@ -33,8 +34,12 @@ def add_data(dataTrain):  # noqa: E501
     resultK = findUsingKMeans([t["data"] for t in trainData], [t["solution"] for t in trainData], dataTrain['data'],
                              swagger_server.algorithmes.utile.distValue)
 
+    trainBaye([centrageSolo(t["data"], 6, 8) for t in trainData], [t["solution"] for t in trainData])
+    resultB = findUsingBaye(centrageSolo(dataTrain['data'], 6, 8),
+                            [-4, -17, 12, 14, 39, -13, 3, 19, 7, -13, -6, 23, 39, 21, 11, 1, 23, 15, -19, 36, 0, 29,
+                             -19, -5, 50, 11, 36, 7, 14, 3, -13, 34, 34, 20, -8, 6, 18, 15, 26, 13, 11, 4, 17, 9, 34,
+                             -4, 1, 2])
 
-    resultB = findUsingBaye([t["data"] for t in trainData], [t["solution"] for t in trainData], dataTrain['data'])
 
     #We had the result to their respectives matrices
     matrixK = db.getMatrix("kmeans")
@@ -75,45 +80,35 @@ def start_train():  # noqa: E501
     matrixB = db.getMatrix("bayesienne")
     matrixN = db.getMatrix("neural")
 
-    data = []
 
     tmp = db.getAllDataTrain()
-    trainBaye([t['data'] for t in tmp], [t["solution"] for t in tmp])
-
-    with open('data.csv', 'r') as csvfile:
-        i = 0
-        s = csv.reader(csvfile, delimiter=';', quotechar='|')
-        for row in s:
-            i += 1
-            if i == 1:
-                continue
-            data.append(list(map(int, row[1:])))
-
-    #n = NeuralNet(4, 4, 10, 1, 0.8)
-    #random.shuffle(data)
-    #for i in range(10000):
-    #    print("Epoch :", i)
-    #    # random.shuffle(data)
-    #    n.train([t[:4] for t in data], [int(t[4])-1 for t in data])
+    trainBaye([centrageSolo(t["data"], 6, 8) for t in tmp], [t["solution"] for t in tmp])
 
 
 
+    n = NeuralNet(48, 10, 30, 1, 0.8)
+    for i in range(100):
+        print("Epoch :", i)
+        n.train([t["data"] for t in trainData], [t["solution"] for t in trainData])
 
     for test in testData:
         resultK = findUsingKMeans([t["data"] for t in trainData], [t["solution"] for t in trainData], test['data'],
                              swagger_server.algorithmes.utile.distValue)
 
 
-        resultB = findUsingBaye(test['data'],  [-9, 31, 3, -6, -1, -10, 1, -10, -2, 4, 2, -8, -5, 47, 3, 31, 0, -9, 0, 0, 3, 43, 41, -1, 3, 16, 88, 10, -6, -5, -2, 20, 17, 45, 38, 4, 2, 44, 33, -1, -8, -4, 9, -2, -6, 19, 0, 2])
+        resultB = findUsingBaye(centrageSolo(test["data"], 6, 8) ,
+                                [-4, -17, 12, 14, 39, -13, 3, 19, 7, -13, -6, 23, 39, 21, 11, 1, 23, 15, -19, 36, 0, 29,
+                                 -19, -5, 50, 11, 36, 7, 14, 3, -13, 34, 34, 20, -8, 6, 18, 15, 26, 13, 11, 4, 17, 9,
+                                 34, -4, 1, 2])
 
-     #   resultN = n.guess(test['data'])
+        resultN = n.guess(test['data'])
 
 
         s = int(test["solution"])
 
         matrixK[s][resultK] += 1
         matrixB[s][resultB] += 1
-      #  matrixN[s][resultN] += 1
+        matrixN[s][resultN] += 1
 
 
     db.addMatrix("kmeans", matrixK)

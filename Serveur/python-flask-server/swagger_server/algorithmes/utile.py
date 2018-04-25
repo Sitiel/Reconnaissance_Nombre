@@ -93,13 +93,13 @@ def distance(image1, image2):
     return retour
 
 
-def distValue(image1, image2, hyperparameters):
+def distValue(image1, image2):
     x = len(image1)
     retour = 0
     img = centrage(image1, image2, 6, 8)
     for i in range(0, x):
         if img[i] != image2[i]:
-            retour += hyperparameters[i+1]
+            retour += 1
     return retour
 
 def printImage(image,largeur,hauteur):
