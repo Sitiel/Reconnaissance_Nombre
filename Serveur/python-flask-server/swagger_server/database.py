@@ -30,6 +30,7 @@ class Database:
         self.dataTrain = client.Reconnaissance_Chiffre.get_collection("DataTrain")
         self.confusionMatrix = client.Reconnaissance_Chiffre.get_collection("ConfusionMatrix")
         self.dataTest = client.Reconnaissance_Chiffre.get_collection("DataTest")
+        self.poids = client.Reconnaissance_Chiffre.get_collection("Poids")
 
     def insertDataTrain(self, data):
         self.dataTrain.insert(data)
@@ -94,6 +95,17 @@ class Database:
             for row in s:
                 self.dataTest.insert({"data": list(map(int, row[1:])), "solution": row[0]})
 
+    def savePoids(self, poids):
+        result = self.poids.find_one({"method": "reseau"})
+        self.poids.insert(
+            {"method": "reseau", "poids": poids}) if not result else self.poids.find_and_modify(
+            {"method": "reseau"}, {"method": "reseau", "poids": poids})
+        return True
 
-
+    def getPoids(self):
+        res = self.poids.find_one()
+        if res == None:
+            return None
+        return res["poids"]
+        
 db = Database()

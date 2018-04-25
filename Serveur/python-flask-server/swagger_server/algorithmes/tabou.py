@@ -18,7 +18,7 @@ def isIn(ltabou, v):
 def tabouCalcul(variablesCount, evaluate):
 
     # Hyperparameters
-    ltabouSize = 1000
+    ltabouSize = 10
 
     ltabou = [[] for i in range(ltabouSize)]
 
@@ -26,8 +26,8 @@ def tabouCalcul(variablesCount, evaluate):
 
     notProgressing = 0
     a = 0
-    minBorne = -10
-    maxBorne = 100
+    minBorne = -20
+    maxBorne = 200
 
     currentBest = current
     currentBestValue = -9999999999
@@ -53,6 +53,7 @@ def tabouCalcul(variablesCount, evaluate):
             current[r] = was
 
         current = newCurrent
+        print(best, current)
 
         ltabou[a] = copy.deepcopy(current)
         a += 1
@@ -64,7 +65,10 @@ def tabouCalcul(variablesCount, evaluate):
             currentBestValue = best
             currentBest = newCurrent
         if notProgressing > 100 and notProgressing%100 == 0:
-            current = [1 for i in range(variablesCount)]
+            if random.randint(0, 1) == 1:
+                current = [1 for _ in range(len(current))]
+            else:
+                current = currentBest
             print("Reset !")
         notProgressing += 1
     print("Current best :", currentBest, "with", currentBestValue)
