@@ -116,3 +116,6 @@ def start_train():  # noqa: E501
     db.addMatrix("neural", matrixN)
 
     return 'success'
+
+def reset_matrix():
+    db.removeMatrix()

@@ -45,7 +45,7 @@ class Database:
             {"method": methodName}, {"method": methodName, "matrix": matrix})
         return True
 
-    def removeMatrices(self):
+    def removeMatrix(self):
         result = self.confusionMatrix.findOneAndDelete({"method": "kmeans"})
         result = self.confusionMatrix.findOneAndDelete({"method": "bayesienne"})
         result = self.confusionMatrix.findOneAndDelete({"method": "neural"})
