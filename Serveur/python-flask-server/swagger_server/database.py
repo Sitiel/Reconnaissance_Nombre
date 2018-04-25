@@ -46,10 +46,10 @@ class Database:
         return True
 
     def removeMatrix(self):
-        result = self.confusionMatrix.findOneAndDelete({"method": "kmeans"})
-        result = self.confusionMatrix.findOneAndDelete({"method": "bayesienne"})
-        result = self.confusionMatrix.findOneAndDelete({"method": "neural"})
-
+        self.confusionMatrix.delete_one({"method": "kmeans"})
+        self.confusionMatrix.delete_one({"method": "bayesienne"})
+        self.confusionMatrix.delete_one({"method": "neural"})
+        
     def getMatrix(self, methodName):
         matrix = self.confusionMatrix.find_one({"method": methodName})
         if matrix is None:
