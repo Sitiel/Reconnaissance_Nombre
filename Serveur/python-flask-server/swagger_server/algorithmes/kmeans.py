@@ -8,3 +8,5 @@ def findUsingKMeans(data, solutions, toFind, distanceFunction, k = 3):
 def findMultipleUsingKMeans(data, solutions, toFinds, distanceFunction, k = 3):
     return [findUsingKMeans(data, solutions, i, distanceFunction) for i in toFinds]
 
+def findImageUsingKMeans(data, solutions, toFind, distanceFunction, k = 3):
+    return nearestPoints = sorted(data, key=lambda r: distanceFunction(r, toFind))[:k]
