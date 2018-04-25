@@ -18,7 +18,7 @@ def isIn(ltabou, v):
 def tabouCalcul(variablesCount, evaluate):
 
     # Hyperparameters
-    ltabouSize = 1
+    ltabouSize = 1000
 
     ltabou = [[] for i in range(ltabouSize)]
 
@@ -26,38 +26,46 @@ def tabouCalcul(variablesCount, evaluate):
 
     notProgressing = 0
     a = 0
+    minBorne = -10
     maxBorne = 100
 
     currentBest = current
     currentBestValue = -9999999999
 
-    while(notProgressing < 100):
-        lVoisins = []
-        while len(lVoisins) < 100:
-            v = copy.deepcopy(current)
-            r = random.randint(0, len(v)-1)
-            v[r] = random.randint(0, maxBorne)
-            if isIn(ltabou, v) == False:
-                lVoisins.append(v)
+    while(notProgressing < 100000):
+
         newCurrent = []
         best = -99999999999
-        for v in lVoisins:
-            tmp = evaluate(v)
-            if tmp > best:
-                best = tmp
-                newCurrent = v
+
+        cmp = 0
+
+        while cmp < 50:
+            r = random.randint(0, len(current)-1)
+            was = current[r]
+            current[r] = random.randint(minBorne, maxBorne)
+            if isIn(ltabou, current) == False:
+                cmp += 1
+                tmp = evaluate(current)
+                # print(tmp, current)
+                if tmp > best:
+                    best = tmp
+                    newCurrent = copy.deepcopy(current)
+            current[r] = was
+
         current = newCurrent
 
-        ltabou[a] = current
+        ltabou[a] = copy.deepcopy(current)
         a += 1
         a = a % ltabouSize
-        print("currentBestValue:", currentBestValue)
 
         if best > currentBestValue:
-            print("best:",best)
+            print("best:", best, current)
             notProgressing = 0
             currentBestValue = best
             currentBest = newCurrent
+        if notProgressing > 100 and notProgressing%100 == 0:
+            current = currentBest
+            print("Reset !")
         notProgressing += 1
     print("Current best :", currentBest, "with", currentBestValue)
     return

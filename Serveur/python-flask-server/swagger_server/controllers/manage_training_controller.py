@@ -5,7 +5,7 @@ from swagger_server import util
 
 from swagger_server.database import db
 from swagger_server.algorithmes.kmeans import findUsingKMeans
-from swagger_server.algorithmes.bayesienne import findUsingBaye
+from swagger_server.algorithmes.bayesienne import findUsingBaye, trainBaye
 from swagger_server.algorithmes.neural import NeuralNet
 
 import swagger_server.algorithmes.utile
@@ -17,6 +17,8 @@ import random
 def add_data(dataTrain):  # noqa: E501
     """Add a train data in database
 
+    Try to guess first then add it to the confusion matrix
+
     Add a train data in database  # noqa: E501
 
     :param dataTrain: Data information
@@ -24,6 +26,31 @@ def add_data(dataTrain):  # noqa: E501
 
     :rtype: None
     """
+    
+    #We get the solution for the 3 algorithms
+    trainData = db.getAllDataTrain()
+
+    resultK = findUsingKMeans([t["data"] for t in trainData], [t["solution"] for t in trainData], dataTrain['data'],
+                             swagger_server.algorithmes.utile.distValue)
+
+
+    resultB = findUsingBaye([t["data"] for t in trainData], [t["solution"] for t in trainData], dataTrain['data'])
+
+    #We had the result to their respectives matrices
+    matrixK = db.getMatrix("kmeans")
+    matrixB = db.getMatrix("bayesienne")
+    matrixN = db.getMatrix("neural")
+    s = int(dataTrain["solution"])
+
+    matrixK[s][resultK] += 1
+    matrixB[s][resultB] += 1
+    #matrixN[s][resultN] += 1
+
+    db.addMatrix("kmeans", matrixK)
+    db.addMatrix("bayesienne", matrixB)
+    db.addMatrix("neural", matrixN)
+
+    #We insert the new data inside the database
     db.insertDataTrain(dataTrain)
 
     if connexion.request.is_json:
@@ -50,6 +77,9 @@ def start_train():  # noqa: E501
 
     data = []
 
+    tmp = db.getAllDataTrain()
+    trainBaye([t['data'] for t in tmp], [t["solution"] for t in tmp])
+
     with open('data.csv', 'r') as csvfile:
         i = 0
         s = csv.reader(csvfile, delimiter=';', quotechar='|')
@@ -59,12 +89,14 @@ def start_train():  # noqa: E501
                 continue
             data.append(list(map(int, row[1:])))
 
-    n = NeuralNet(4, 4, 10, 1, 0.8)
-    random.shuffle(data)
-    for i in range(10000):
-        print("Epoch :", i)
-        # random.shuffle(data)
-        n.train([t[:4] for t in data], [int(t[4])-1 for t in data])
+    #n = NeuralNet(4, 4, 10, 1, 0.8)
+    #random.shuffle(data)
+    #for i in range(10000):
+    #    print("Epoch :", i)
+    #    # random.shuffle(data)
+    #    n.train([t[:4] for t in data], [int(t[4])-1 for t in data])
+
+
 
 
     for test in testData:
@@ -72,16 +104,16 @@ def start_train():  # noqa: E501
                              swagger_server.algorithmes.utile.distValue)
 
 
-        resultB = findUsingBaye([t["data"] for t in trainData], [t["solution"] for t in trainData], test['data'])
+        resultB = findUsingBaye(test['data'],  [-9, 31, 3, -6, -1, -10, 1, -10, -2, 4, 2, -8, -5, 47, 3, 31, 0, -9, 0, 0, 3, 43, 41, -1, 3, 16, 88, 10, -6, -5, -2, 20, 17, 45, 38, 4, 2, 44, 33, -1, -8, -4, 9, -2, -6, 19, 0, 2])
 
-        resultN = n.guess(test['data'])
+     #   resultN = n.guess(test['data'])
 
 
         s = int(test["solution"])
 
         matrixK[s][resultK] += 1
         matrixB[s][resultB] += 1
-        matrixN[s][resultN] += 1
+      #  matrixN[s][resultN] += 1
 
 
     db.addMatrix("kmeans", matrixK)

@@ -17,8 +17,7 @@ body {
 }
 
 body{
-	background-image: url("Background.jpg");
-	background-repeat: no-repeat;
+	background: url("Background.jpg") no-repeat center center fixed;
 	background-size:cover;
 }
 

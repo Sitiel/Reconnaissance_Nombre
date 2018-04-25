@@ -49,23 +49,17 @@ def centrageSolo(image, largeur, hauteur):
     bas = min(basDroite[0:largeur])
     droite = min(basDroite[largeur:-1])
 
-    print("basDroite : ", basDroite," hautGauche : ", hautGauche)
-    print("haut : ",haut,"gauche : ",gauche,"bas : ",bas,"droite : ",droite)
-
     bas = (int)(((bas - haut)/2 + hauteur) % hauteur)
     gauche = (int)(((gauche - droite)/2 + largeur) % largeur)
 
-    print("bas : ",bas," gauche : ",gauche)
-
     for i in range (bas) :
-        print("coucou")
         image = deplacementImage (image, 2, largeur,hauteur)
     for i in range (gauche) :
         image = deplacementImage (image, 1, largeur,hauteur)
 
     return image
-        
- 
+
+
 
 # direction correspond a un entier, 1 pour la gauche, 2 pour le bas
 def deplacementImage(image, direction, largeur, hauteur):
@@ -99,13 +93,13 @@ def distance(image1, image2):
     return retour
 
 
-def distValue(image1, image2):
+def distValue(image1, image2, hyperparameters):
     x = len(image1)
     retour = 0
     img = centrage(image1, image2, 6, 8)
     for i in range(0, x):
         if img[i] != image2[i]:
-            retour += 1
+            retour += hyperparameters[i+1]
     return retour
 
 def printImage(image,largeur,hauteur):

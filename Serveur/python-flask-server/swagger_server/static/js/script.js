@@ -35,7 +35,7 @@ c.addEventListener('mousedown', function (event) {
 	var j = parseInt(canvasX / realWidth);
 	if (number[j + i * 6] === 1) {
 		number[j + i * 6] = -1;
-		draw();
+		drawWhite(i,j);
 		/*ctx.fillStyle = "#FFFFFF";
 		ctx.fillRect(j * realWidth+1, i * realHeight+1, realWidth-2, realHeight-2);*/
 	}
@@ -115,6 +115,27 @@ function draw() {
 	}
 }
 
+function drawWhite(x,y){
+
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillRect(y * realWidth, x * realHeight, realWidth, realHeight);
+
+	ctx.moveTo(y * realWidth, 0);
+	ctx.lineTo(y * realWidth, c.height);
+	ctx.stroke();
+
+	ctx.moveTo(0, x * realHeight);
+	ctx.lineTo(c.width, x * realHeight);
+	ctx.stroke();
+}
+
+
+function clearNumber() {
+	number.fill(-1, 0);
+	draw();
+}
+
+
 function eraseNull(table){
 	var retour = table;
 	for (var i = 0; i < 8; i++) {
@@ -156,6 +177,8 @@ function addToTrain() {
         data: data,
         success: function(response){
             alert("Reçu");
+            //Une fois les resultats reçus on mets à jour les matrices
+			getMatrix();
         },
         error: function(jqXHR,textStatus,errorThrown){
         	alert("ERROR");
@@ -191,9 +214,6 @@ function sendToDB() {
 			$('#res_bayes').text(response.baye);
 	        //neurones
 			$('#res_neuro').text(response.neural);
-
-	        //Une fois les resultats reçus on mets à jour les matrices
-			getMatrix();
 	    },
 	    error: function(jqXHR,textStatus,errorThrown){
 	    	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
@@ -391,11 +411,6 @@ function startTrain() {
 	        $('#loading').modal('toggle');
 	    }
 	});
-}
-
-function clearNumber() {
-	number.fill(-1, 0);
-	draw();
 }
 
 draw();
