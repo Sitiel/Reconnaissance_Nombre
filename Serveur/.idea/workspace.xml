@@ -12,7 +12,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="neural.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="neural.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
@@ -93,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kmeans.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="kmeans.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/kmeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="49" lean-forward="false" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+            <state relative-caret-position="165">
+              <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -149,11 +149,11 @@
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/bayesienne.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/train_baye.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/tabou.py" />
-        <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/kmeans.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/utile.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/controllers/test_data_controller.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/controllers/manage_training_controller.py" />
         <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural.py" />
+        <option value="$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/kmeans.py" />
       </list>
     </option>
   </component>
@@ -815,14 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/kmeans.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="49" lean-forward="false" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/encoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -907,6 +899,14 @@
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/kmeans.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
