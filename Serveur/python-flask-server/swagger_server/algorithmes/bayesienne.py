@@ -82,7 +82,10 @@ def findUsingBaye(toFind, hyperparameters):
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
         for j in range(len(toFind)):
-            proba[i] *= pow(loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]), hyperparameters[j])
+            ret = loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1])
+            if (ret < 0.01):
+                ret = 0.01
+            proba[i] *= pow(ret, hyperparameters[j])
     return proba.index(max(proba))
 
 def dataToLargeurLongueur(data):
