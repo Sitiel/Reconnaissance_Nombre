@@ -1,7 +1,8 @@
 //Modal
 
-
-//Calcul
+//////////
+//CANVAS//
+//////////
 number = new Array(6 * 8);
 number.fill(-1, 0);
 
@@ -135,6 +136,14 @@ function clearNumber() {
 	draw();
 }
 
+//////////
+//////////
+//////////
+
+
+//////////
+///AJAX///
+//////////
 
 function eraseNull(table){
 	var retour = table;
@@ -214,6 +223,8 @@ function sendToDB() {
 			$('#res_bayes').text(response.baye);
 	        //neurones
 			$('#res_neuro').text(response.neural);
+			//all
+			$('#res_all').text(response.all);
 	    },
 	    error: function(jqXHR,textStatus,errorThrown){
 	    	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
@@ -258,39 +269,44 @@ function getMatrix() {
             var k_color;
             var b_color;
             var n_color;
+            var a_color;
             //Diagonnal
-            var totalCorrect = [0, 0, 0];
-            var total = [0, 0, 0];
+            var totalCorrect = [0, 0, 0, 0];
+            var total = [0, 0, 0, 0];
             //Ligne
-            var totalColCorrect = [0, 0, 0];
-            var totalCol = [0, 0, 0];
+            var totalColCorrect = [0, 0, 0, 0];
+            var totalCol = [0, 0, 0, 0];
             //Colonne
             var totalLigneCorrect = [];
             var totalLigne = [];
 
             for(i=0; i<10; i++){
-            	totalLigneCorrect[i] = [0, 0, 0];
-            	totalLigne[i] = [0, 0, 0];
+            	totalLigneCorrect[i] = [0, 0, 0, 0];
+            	totalLigne[i] = [0, 0, 0, 0];
             }
 
             for(i=0;i<11;i++){//Ligne
             	id_k = '#'+response.data[1].method+'_ligne'+i;
             	id_b = '#'+response.data[0].method+'_ligne'+i;
             	id_n = '#'+response.data[2].method+'_ligne'+i;
+            	id_a = '#'+response.data[3].method+'_ligne'+i;
             	//On vide les matrices de confusion
 				$(id_k).empty();
 				$(id_b).empty();
 				$(id_n).empty();
+				$(id_a).empty();
 				//Colonne&Ligne pourcentage
 				if (i == 10){
 					$(id_k).append('<th scope="row">percent</th>');
 					$(id_b).append('<th scope="row">percent</th>');
 					$(id_n).append('<th scope="row">percent</th>');
+					$(id_a).append('<th scope="row">percent</th>');
 				}
 				else {
 					$(id_k).append('<th scope="row">' + i + '</th>');
 					$(id_b).append('<th scope="row">' + i + '</th>');
 					$(id_n).append('<th scope="row">' + i + '</th>');
+					$(id_a).append('<th scope="row">' + i + '</th>');
 				}
 
 				for(j=0; j<11; j++){//Colonne
@@ -300,33 +316,41 @@ function getMatrix() {
 							var k = (totalCorrect[1]/total[1])*100;
 							var b = (totalCorrect[0]/total[0])*100;
 							var n = (totalCorrect[2]/total[2])*100;
+							var a = (totalCorrect[3]/total[3])*100;
 							$(id_k).append("<th class='"+getColorScheme(getPercentage(k))+"'>" + getPercentage(k) + "</th>");
 							$(id_b).append("<th class='"+getColorScheme(getPercentage(b))+"'>" + getPercentage(b) + "</th>");
 							$(id_n).append("<th class='"+getColorScheme(getPercentage(n))+"'>" + getPercentage(n) + "</th>");
+							$(id_a).append("<th class='"+getColorScheme(getPercentage(a))+"'>" + getPercentage(a) + "</th>");
 						}
 						else if(j == 10){
 							var k = (totalColCorrect[1]/totalCol[1])*100;
 							var b = (totalColCorrect[0]/totalCol[0])*100;
 							var n = (totalColCorrect[2]/totalCol[2])*100;
+							var a = (totalColCorrect[3]/totalCol[3])*100;
 							$(id_k).append("<th class='"+getColorScheme(getPercentage(k))+"'>" + getPercentage(k) + "</th>");
 							$(id_b).append("<th class='"+getColorScheme(getPercentage(b))+"'>" + getPercentage(b) + "</th>");
 							$(id_n).append("<th class='"+getColorScheme(getPercentage(n))+"'>" + getPercentage(n) + "</th>");
+							$(id_a).append("<th class='"+getColorScheme(getPercentage(a))+"'>" + getPercentage(a) + "</th>");
 
 							//Retour a zero pour une nouvelle ligne
 							totalCol[0] = 0;//Total Bayesienne
 							totalCol[1] = 0;//Total KVoisin
 							totalCol[2] = 0;//Total Neural
+							totalCol[3] = 0;
 							totalColCorrect[0] = 0;//Total Bayesienne
 							totalColCorrect[1] = 0;//Total KVoisin
 							totalColCorrect[2] = 0;//Total Neural
+							totalColCorrect[3] = 0;							
 
 						}else{
 							var k = (totalLigneCorrect[j][1]/totalLigne[j][1])*100;
 							var b = (totalLigneCorrect[j][0]/totalLigne[j][0])*100;
 							var n = (totalLigneCorrect[j][2]/totalLigne[j][2])*100;
+							var a = (totalLigneCorrect[j][3]/totalLigne[j][3])*100;
 							$(id_k).append("<th class='"+getColorScheme(getPercentage(k))+"'>" + getPercentage(k) + "</th>");
 							$(id_b).append("<th class='"+getColorScheme(getPercentage(b))+"'>" + getPercentage(b) + "</th>");
 							$(id_n).append("<th class='"+getColorScheme(getPercentage(n))+"'>" + getPercentage(n) + "</th>");
+							$(id_a).append("<th class='"+getColorScheme(getPercentage(a))+"'>" + getPercentage(a) + "</th>");
 						}
 						continue;
 					}
@@ -335,35 +359,43 @@ function getMatrix() {
 					totalCol[0] += response.data[0].matrix[i][j];//Total Bayesienne
 					totalCol[1] += response.data[1].matrix[i][j];//Total KVoisin
 					totalCol[2] += response.data[2].matrix[i][j];//Total Neural
+					totalCol[3] += response.data[3].matrix[i][j];//Total Neural
 					//Ligne
 					totalLigne[j][0] += response.data[0].matrix[i][j];
 					totalLigne[j][1] += response.data[1].matrix[i][j];
 					totalLigne[j][2] += response.data[2].matrix[i][j];
+					totalLigne[j][3] += response.data[3].matrix[i][j];
 					//Diag
 					total[0] += response.data[0].matrix[i][j];//Total Bayesienne
 					total[1] += response.data[1].matrix[i][j];//Total KVoisin
 					total[2] += response.data[2].matrix[i][j];//Total Neural
+					total[3] += response.data[3].matrix[i][j];//Total Neural
 
 					if (i==j){
 						$(id_k).append("<th class='ui-helper-green'>"+response.data[1].matrix[i][j]+"</th>");
 						$(id_b).append("<th class='ui-helper-green'>"+response.data[0].matrix[i][j]+"</th>");
 						$(id_n).append("<th class='ui-helper-green'>"+response.data[2].matrix[i][j]+"</th>");
+						$(id_a).append("<th class='ui-helper-green'>"+response.data[3].matrix[i][j]+"</th>");
 						//Ligne
 						totalColCorrect[0] += response.data[0].matrix[i][j];
 						totalColCorrect[1] += response.data[1].matrix[i][j];
 						totalColCorrect[2] += response.data[2].matrix[i][j];
+						totalColCorrect[3] += response.data[3].matrix[i][j];
 						//Ligne
 						totalLigneCorrect[j][0] += response.data[0].matrix[i][j];
 						totalLigneCorrect[j][1] += response.data[1].matrix[i][j];
 						totalLigneCorrect[j][2] += response.data[2].matrix[i][j];
+						totalLigneCorrect[j][3] += response.data[3].matrix[i][j];
 						//Diag
 						totalCorrect[0] += response.data[0].matrix[i][j];
 						totalCorrect[1] += response.data[1].matrix[i][j];
 						totalCorrect[2] += response.data[2].matrix[i][j];
+						totalCorrect[3] += response.data[3].matrix[i][j];
 					}else{
 						$(id_k).append("<th>"+response.data[1].matrix[i][j]+"</th>");
 						$(id_b).append("<th>"+response.data[0].matrix[i][j]+"</th>");
 						$(id_n).append("<th>"+response.data[2].matrix[i][j]+"</th>");
+						$(id_a).append("<th>"+response.data[3].matrix[i][j]+"</th>");
 					}
 				}
 
@@ -428,16 +460,23 @@ function clearMatrices() {
 	    }
 	});
 }
+///////////
+///////////
+///////////
 
 
+///////////
+////FUN////
+///////////
 
-///FUN///
+nbImg = 0;
+tabIdImg = [];
 
-function makeDiv(img){
+
+function makeDiv(img,idimg){
     // vary size for fun
     var divsize = ((Math.random()*100) + 50).toFixed();
-    var color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
-    $newdiv = $('<img src="'+img+'" alt="load">').css({
+    $newdiv = $('<img id="boobs'+idimg+'" src="'+img+'" alt="load" onclick="stopImage('+idimg+')"></a>').css({
         'width':divsize+'px',
         'height':divsize+'px'
     });
@@ -451,10 +490,20 @@ function makeDiv(img){
         'left':posx+'px',
         'top':posy+'px',
         'display':'none'
-    }).appendTo( 'body' ).fadeIn(100).delay(1000).fadeOut(500, function(){
-      $(this).remove();
-      makeDiv(img); 
+    }).appendTo( 'body' ).fadeIn(500).delay(1000).fadeOut(500, function(){
+		$(this).remove();
+		if(tabIdImg[idimg]){
+			makeDiv(img,idimg);
+		}
     }); 
+}
+
+function stopImage(idimg){
+	tabIdImg[idimg] = false;
+	$("#boobs"+idimg).animate({
+        height: '150px',
+        width: '150px'
+    });
 }
 
 
@@ -466,7 +515,11 @@ $(document).keydown(function (e) {
         if (n === k.length) {
         	//creer un random et choisir une des images gif pour le makeDiv
 
-            makeDiv('css/bounce'+image[Math.floor(Math.random() * image.length)]+'.gif'); // à remplacer par votre code
+        	for(i = 0; i< 20; i++){
+            	makeDiv('css/bounce'+image[Math.floor(Math.random() * image.length)]+'.gif',nbImg); // à remplacer par votre code
+            	tabIdImg.push(true);
+            	nbImg+=1;
+            }
             n = 0;
             return false;
         }
@@ -475,6 +528,11 @@ $(document).keydown(function (e) {
         n = 0;
     }
 });
+
+///////////
+///////////
+///////////
+
 
 
 

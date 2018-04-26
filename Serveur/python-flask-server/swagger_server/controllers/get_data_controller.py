@@ -27,5 +27,9 @@ def get_maxtrix():  # noqa: E501
         {
             "method": "neural",
             "matrix": db.getMatrix("neural")
+        },
+        {
+            "method": "all",
+            "matrix": db.getMatrix("all")
         }
     ]}
