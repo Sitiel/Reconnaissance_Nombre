@@ -22,6 +22,7 @@ def trainBayesienne():
     recuitCalcul(14, evaluateBayesienne)
 
 testData = db.getAllDataTest() + db.getAllDataTrain()
+print(len(testData))
 for i in range(len(testData)):
     centrageSolo(testData[i]['data'],6,8)
 random.shuffle(testData)
