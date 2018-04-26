@@ -78,6 +78,7 @@ def trainBaye (data, solutions):
 def findUsingBaye(toFind, hyperparameters):
     global possibilities
     global classifieur
+    toFind=dataToLargeurLongueurImage(toFind)
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
         for j in range(len(toFind)):
@@ -94,3 +95,8 @@ def dataToLargeurLongueur(data):
             newData[j%6]+=toAdd
             newData[6+int(j/6)]+=toAdd
         data[i]=copy.deepcopy(newData)
+
+def dataToLargeurLongueurImage(image)
+    tab = [image]
+    dataToLargeurLongueur(tab)
+    return tab[0]
