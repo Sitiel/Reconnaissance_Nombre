@@ -1,6 +1,7 @@
 #Bayesienne
 import math
 import random
+import copy
 
 def moyenne(listImage):
     listRetour = []
@@ -31,6 +32,7 @@ def loiNormale(x, moyenne, ecartType):
 
 
 def evaluateur(data, solutions, toFind):
+    dataToLargeurLongueur(evaluateur)
     dataSorted = []
     dataEcarType = []
     dataMoyenne = []
@@ -60,6 +62,7 @@ possibilities = 0
 classifieur = []
 
 def trainBaye (data, solutions):
+    dataToLargeurLongueur(data)
     global possibilities
     global classifieur
     possibilities = 10
@@ -75,10 +78,19 @@ def trainBaye (data, solutions):
 def findUsingBaye(toFind, hyperparameters):
     global possibilities
     global classifieur
-
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
         for j in range(len(toFind)):
             proba[i] *= pow(loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]), hyperparameters[j])
-
     return proba.index(max(proba))
+
+def dataToLargeurLongueur(data):
+    for i in range (len(data)):
+        newData=[0 for j in range (14)]
+        for j in range(len(data[i])):
+            toAdd=0
+            if data[i][j]==1:
+                toAdd=1
+            newData[j%6]+=toAdd
+            newData[6+int(j/6)]+=toAdd
+        data[i]=copy.deepcopy(newData)

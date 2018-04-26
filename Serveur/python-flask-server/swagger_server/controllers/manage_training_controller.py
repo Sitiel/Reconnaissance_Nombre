@@ -37,9 +37,7 @@ def add_data(dataTrain):  # noqa: E501
 
     trainBaye([centrageSolo(t["data"], 6, 8) for t in trainData], [t["solution"] for t in trainData])
     resultB = findUsingBaye(centrageSolo(dataTrain['data'], 6, 8),
-                            [7, -10, -9, -10, -18, -15, -2, -19, 16, 20, -15, 37, 4, 35, 7, 36, 27, 16, 26, 8, 31, 10,
-                             -18, -15, 0, 2, 34, 18, 15, -6, 5, 31, 65, -4, 44, 27, 9, 5, 28, 30, -4, 11, -2, 1, -7, 13,
-                             -5, 7])
+                            [4.14, 46.99, 24.19, 15, 12.04, 9, 15.31, 18, 59.58, 20.99, 61.95, 66.41, 8, 12])
 
     n = NeuralNet(48, 10, 50, 2, 0.1)
     resultN = n.guess(swagger_server.algorithmes.utile.centrageSolo(dataTrain['data'], 6, 8))
@@ -114,9 +112,7 @@ def start_train():  # noqa: E501
 
 
         resultB = findUsingBaye(centrageSolo(test["data"], 6, 8) ,
-                                [7, -10, -9, -10, -18, -15, -2, -19, 16, 20, -15, 37, 4, 35, 7, 36, 27, 16, 26, 8, 31,
-                                 10, -18, -15, 0, 2, 34, 18, 15, -6, 5, 31, 65, -4, 44, 27, 9, 5, 28, 30, -4, 11, -2, 1,
-                                 -7, 13, -5, 7])
+                                [4.14, 46.99, 24.19, 15, 12.04, 9, 15.31, 18, 59.58, 20.99, 61.95, 66.41, 8, 12])
 
         resultN = n.guess(centrageSolo(test['data'], 6, 8))
 

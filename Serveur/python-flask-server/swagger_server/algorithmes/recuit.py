@@ -6,7 +6,7 @@ from lireOut import lireOutTxt
 percentParam = []
 
 def changeOneParam(param,borneMax,paramToChange):
-	param[paramToChange]=round(random.random()*borneMax-20,2)
+	param[paramToChange]=round(random.random()*borneMax-3,2)
 	return param
 
 def chooseParamToChange():
@@ -20,7 +20,7 @@ def chooseParamToChange():
 
 def reloadParamToChange():
 	global percentParam
-	a0 = [1]*48
+	a0 = [1]*14
 	a = lireOutTxt("out.txt")
 	b = lireOutTxt("out2.txt")
 	percentParam = [x + y + z for x,y,z in zip(a,b,a0)]
