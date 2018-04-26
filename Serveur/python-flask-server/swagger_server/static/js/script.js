@@ -223,6 +223,8 @@ function sendToDB() {
 			$('#res_bayes').text(response.baye);
 	        //neurones
 			$('#res_neuro').text(response.neural);
+			//all
+			$('#res_all').text(response.all);
 	    },
 	    error: function(jqXHR,textStatus,errorThrown){
 	    	alert(" !!! Une erreur a eu lieu voir la console pour plus d'info !!! ");
