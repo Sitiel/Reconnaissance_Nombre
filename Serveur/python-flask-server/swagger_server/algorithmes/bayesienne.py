@@ -32,7 +32,6 @@ def loiNormale(x, moyenne, ecartType):
 
 
 def evaluateur(data, solutions, toFind):
-    dataToLargeurLongueur(evaluateur)
     dataSorted = []
     dataEcarType = []
     dataMoyenne = []
@@ -62,7 +61,6 @@ possibilities = 0
 classifieur = []
 
 def trainBaye (data, solutions):
-    dataToLargeurLongueur(data)
     global possibilities
     global classifieur
     possibilities = 10
@@ -78,28 +76,8 @@ def trainBaye (data, solutions):
 def findUsingBaye(toFind, hyperparameters):
     global possibilities
     global classifieur
-    toFind=dataToLargeurLongueurImage(toFind)
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
         for j in range(len(toFind)):
-            ret = loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1])
-            if (ret < 0.01):
-                ret = 0.01
-            proba[i] *= pow(ret, hyperparameters[j])
+            proba[i] *= pow(hyperparameters[j*2+1] +loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]), hyperparameters[j*2])
     return proba.index(max(proba))
-
-def dataToLargeurLongueur(data):
-    for i in range (len(data)):
-        newData=[0 for j in range (14)]
-        for j in range(len(data[i])):
-            toAdd=0
-            if data[i][j]==1:
-                toAdd=1
-            newData[j%6]+=toAdd
-            newData[6+int(j/6)]+=toAdd
-        data[i]=copy.deepcopy(newData)
-
-def dataToLargeurLongueurImage(image):
-    tab = [image]
-    dataToLargeurLongueur(tab)
-    return tab[0]

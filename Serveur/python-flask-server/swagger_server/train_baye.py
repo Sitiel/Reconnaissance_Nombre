@@ -19,18 +19,7 @@ def trainBayesienne():
         centrageSolo(tmp[i]['data'],6,8)
     data = [t['data'] for t in tmp]
     trainBaye(data, [t["solution"] for t in tmp])
-    tabouCalcul(14, evaluateBayesienne)
-
-def dataToLargeurLongueur(data):
-    for i in range (len(data)):
-        newData=[0 for j in range (14)]
-        for j in range(len(data[i])):
-            toAdd=0
-            if data[i]['data'][j]==1:
-                toAdd=1
-            newData[j%6]+=toAdd
-            newData[6+int(j/6)]+=toAdd
-        data[i]['data']=copy.deepcopy(newData)
+    tabouCalcul(96, evaluateBayesienne)
 
 
 testData = db.getAllDataTest() + db.getAllDataTrain()

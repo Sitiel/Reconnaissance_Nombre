@@ -42,7 +42,10 @@ def tabouCalcul(variablesCount, evaluate):
         while cmp < 20:
             r = random.randint(0, len(current)-1)
             was = current[r]
-            current[r] = random.randint(minBorne, maxBorne)
+            if (r%1):
+                current[r] = random.uniform(0,1)
+            else:
+                current[r] = random.randint(minBorne, maxBorne)
             if isIn(ltabou, current) == False:
                 cmp += 1
                 tmp = evaluate(current)
