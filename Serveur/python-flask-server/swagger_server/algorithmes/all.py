@@ -18,4 +18,4 @@ def testAll (image, retK, retB):
             if (retK == retB):
                 return retN
             else:
-                return retB
+                return retK
