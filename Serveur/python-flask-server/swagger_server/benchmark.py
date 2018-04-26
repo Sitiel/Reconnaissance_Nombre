@@ -8,7 +8,7 @@ import swagger_server.algorithmes.utile
 from swagger_server.database import db
 import random
 
-class BenchMark:
+class Benchmark:
 
     def test_data(self, image):  # noqa: E501
         """Add a train data in database
@@ -39,4 +39,4 @@ class BenchMark:
         return {"kmeans": resultK, 'baye': resultB, 'neural': resultN}
 
 
-benchMark = BenchMark()
+benchMark = Benchmark()
