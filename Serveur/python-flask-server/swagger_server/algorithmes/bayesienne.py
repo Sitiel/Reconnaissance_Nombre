@@ -96,7 +96,7 @@ def dataToLargeurLongueur(data):
             newData[6+int(j/6)]+=toAdd
         data[i]=copy.deepcopy(newData)
 
-def dataToLargeurLongueurImage(image)
+def dataToLargeurLongueurImage(image):
     tab = [image]
     dataToLargeurLongueur(tab)
     return tab[0]

@@ -15,9 +15,11 @@ def evaluateBayesienne(hyperparameters):
 
 def trainBayesienne():
     tmp = db.getAllDataTrain()
+    for i in range(len(tmp)):
+        centrageSolo(tmp[i]['data'],6,8)
     data = [t['data'] for t in tmp]
     trainBaye(data, [t["solution"] for t in tmp])
-    tabouCalcul(48, evaluateBayesienne)
+    tabouCalcul(14, evaluateBayesienne)
 
 def dataToLargeurLongueur(data):
     for i in range (len(data)):
@@ -32,6 +34,8 @@ def dataToLargeurLongueur(data):
 
 
 testData = db.getAllDataTest() + db.getAllDataTrain()
+for i in range(len(testData)):
+    centrageSolo(testData[i]['data'],6,8)
 
 dataToLargeurLongueur(testData)
 random.shuffle(testData)

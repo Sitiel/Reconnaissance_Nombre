@@ -21,23 +21,8 @@ def trainBayesienne():
     trainBaye(data, [t["solution"] for t in tmp])
     recuitCalcul(14, evaluateBayesienne)
 
-def dataToLargeurLongueur(data):
-    for i in range (len(data)):
-        newData=[0 for j in range (14)]
-        for j in range(len(data[i]['data'])):
-            toAdd=0
-            if data[i]['data'][j]==1:
-                toAdd=1
-            newData[j%6]+=toAdd
-            newData[6+int(j/6)]+=toAdd
-        data[i]['data']=copy.deepcopy(newData)
-
-
-
 testData = db.getAllDataTest() + db.getAllDataTrain()
-print(len(testData))
 for i in range(len(testData)):
     centrageSolo(testData[i]['data'],6,8)
-dataToLargeurLongueur(testData)
 random.shuffle(testData)
 trainBayesienne()
