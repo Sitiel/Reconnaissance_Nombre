@@ -37,9 +37,9 @@ class Benchmark:
         n = NeuralNet(48, 10, 30, 2, 0.1)
         resultN = n.guess(swagger_server.algorithmes.utile.centrageSolo(image['data'],6, 8))
 
-        resultA = testAll(image, resultK, resultB)
+        resultA = testAll(image['data'], resultK, resultB)
 
         return {"kmeans": resultK, 'baye': resultB, 'neural': resultN, 'all': resultA}
 
 
-benchMark = Benchmark()
+benchmark = Benchmark()
