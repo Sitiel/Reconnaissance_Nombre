@@ -9,7 +9,7 @@ def evaluateBayesienne(hyperparameters):
     global testData
     succes = 0
     for data in testData:
-        find = findUsingBaye(["data"], hyperparameters)
+        find = findUsingBaye(data["data"], hyperparameters)
         succes += 1 if find == int(data["solution"]) else 0
     return succes
 
@@ -37,6 +37,5 @@ testData = db.getAllDataTest() + db.getAllDataTrain()
 for i in range(len(testData)):
     centrageSolo(testData[i]['data'],6,8)
 
-dataToLargeurLongueur(testData)
 random.shuffle(testData)
 trainBayesienne()

@@ -26,7 +26,7 @@ def tabouCalcul(variablesCount, evaluate):
 
     notProgressing = 0
     a = 0
-    minBorne = -20
+    minBorne = -3
     maxBorne = 200
 
     currentBest = current
