@@ -7,6 +7,7 @@ from swagger_server.database import db
 from swagger_server.algorithmes.kmeans import findUsingKMeans
 from swagger_server.algorithmes.bayesienne import findUsingBaye, trainBaye
 from swagger_server.algorithmes.neural import NeuralNet
+from swagger_server.algorithmes.all import testAll
 from swagger_server.algorithmes.utile import centrageSolo
 
 import swagger_server.algorithmes.utile
@@ -43,27 +44,31 @@ def add_data(dataTrain):  # noqa: E501
     n = NeuralNet(48, 10, 50, 2, 0.1)
     resultN = n.guess(swagger_server.algorithmes.utile.centrageSolo(dataTrain['data'], 6, 8))
 
+    resultA = testAll(dataTrain['data'], resultK, resultB)
 
     #We had the result to their respectives matrices
     matrixK = db.getMatrix("kmeans")
     matrixB = db.getMatrix("bayesienne")
     matrixN = db.getMatrix("neural")
+    matrixA = db.getMatrix("all")
     s = int(dataTrain["solution"])
 
     matrixK[s][resultK] += 1
     matrixB[s][resultB] += 1
     matrixN[s][resultN] += 1
+    matrixA[s][resultA] += 1
 
     db.addMatrix("kmeans", matrixK)
     db.addMatrix("bayesienne", matrixB)
     db.addMatrix("neural", matrixN)
+    db.addMatrix("all", matrixA)
 
     #We insert the new data inside the database
     db.insertDataTrain(dataTrain)
 
     if connexion.request.is_json:
         dataTrain = DataTrain.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'success'
 
 
 def start_train():  # noqa: E501
@@ -82,6 +87,7 @@ def start_train():  # noqa: E501
     matrixK = db.getMatrix("kmeans")
     matrixB = db.getMatrix("bayesienne")
     matrixN = db.getMatrix("neural")
+    matrixA = db.getMatrix("all")
 
 
     tmp = db.getAllDataTrain()
@@ -114,12 +120,15 @@ def start_train():  # noqa: E501
 
         resultN = n.guess(centrageSolo(test['data'], 6, 8))
 
+        resultA = testAll(test['data'], resultK, resultB)
+
 
         s = int(test["solution"])
 
         matrixK[s][resultK] += 1
         matrixB[s][resultB] += 1
         matrixN[s][resultN] += 1
+        matrixA[s][resultA] += 1
 
         #if resultN != s:
         #    print("Error on ", centrageSolo(test["data"],6,8), "say", resultN, "was", s)
@@ -128,6 +137,7 @@ def start_train():  # noqa: E501
     db.addMatrix("kmeans", matrixK)
     db.addMatrix("bayesienne", matrixB)
     db.addMatrix("neural", matrixN)
+    db.addMatrix("all", matrixA)
 
     return 'success'
 

@@ -3,6 +3,7 @@ import six
 from swagger_server.algorithmes.kmeans import findUsingKMeans
 from swagger_server.algorithmes.bayesienne import findUsingBaye, trainBaye
 from swagger_server.algorithmes.neural import NeuralNet
+from swagger_server.algorithmes.all import testAll
 from swagger_server.models.data import Data  # noqa: E501
 import swagger_server.algorithmes.utile
 from swagger_server.database import db
@@ -36,7 +37,9 @@ class Benchmark:
         n = NeuralNet(48, 10, 30, 2, 0.1)
         resultN = n.guess(swagger_server.algorithmes.utile.centrageSolo(image['data'],6, 8))
 
-        return {"kmeans": resultK, 'baye': resultB, 'neural': resultN}
+        resultA = testAll(image, resultK, resultB)
+
+        return {"kmeans": resultK, 'baye': resultB, 'neural': resultN, 'all': resultA}
 
 
 benchMark = Benchmark()

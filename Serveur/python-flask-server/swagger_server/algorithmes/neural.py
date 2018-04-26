@@ -136,3 +136,15 @@ class NeuralNet:
                 inData += [1]
 
         return inData.index(max(inData))
+    
+    def percents(self, data):
+        inData = data + [1]  # bias
+        for layer in range(len(self.weights)):
+            outData = []
+            for neurone in range(len(self.weights[layer])):
+                outData.append(self.activation(sum([a * b for a, b in zip(inData, self.weights[layer][neurone])])))
+            inData = outData
+            if layer != len(self.weights) - 1:
+                inData += [1]
+
+        return inData

@@ -82,3 +82,14 @@ def findUsingBaye(toFind, hyperparameters):
             proba[i] *= pow(loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]), hyperparameters[j])
 
     return proba.index(max(proba))
+
+def findBaye(toFind, hyperparameters):
+    global possibilities
+    global classifieur
+
+    proba = [1 for i in range(possibilities)]
+    for i in range(possibilities):
+        for j in range(len(toFind)):
+            proba[i] *= pow(loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]), hyperparameters[j])
+
+    return proba
