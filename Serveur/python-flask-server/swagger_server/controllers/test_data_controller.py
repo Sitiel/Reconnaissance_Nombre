@@ -25,16 +25,16 @@ def test_data(image):  # noqa: E501
     trainData = db.getAllDataTrain()
 
     resultK = findUsingKMeans([t["data"] for t in trainData], [t["solution"] for t in trainData], image['data'],
-                             swagger_server.algorithmes.utile.distValue)
+                             swagger_server.algorithmes.utile.distValue, k=3)
 
     trainBaye([swagger_server.algorithmes.utile.centrageSolo(t["data"], 6, 8) for t in trainData], [t["solution"] for t in trainData])
 
     resultB = findUsingBaye(swagger_server.algorithmes.utile.centrageSolo(image['data'], 6, 8),
-                            [-4, -17, 12, 14, 39, -13, 3, 19, 7, -13, -6, 23, 39, 21, 11, 1, 23, 15, -19, 36, 0, 29,
-                             -19, -5, 50, 11, 36, 7, 14, 3, -13, 34, 34, 20, -8, 6, 18, 15, 26, 13, 11, 4, 17, 9, 34,
-                             -4, 1, 2])
+                            [7, -10, -9, -10, -18, -15, -2, -19, 16, 20, -15, 37, 4, 35, 7, 36, 27, 16, 26, 8, 31, 10,
+                             -18, -15, 0, 2, 34, 18, 15, -6, 5, 31, 65, -4, 44, 27, 9, 5, 28, 30, -4, 11, -2, 1, -7, 13,
+                             -5, 7])
 
-    n = NeuralNet(48, 10, 30, 2, 0.1)
+    n = NeuralNet(48, 10, 50, 2, 0.1)
     resultN = n.guess(swagger_server.algorithmes.utile.centrageSolo(image['data'],6, 8))
 
     if connexion.request.is_json:
