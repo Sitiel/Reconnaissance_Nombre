@@ -43,10 +43,10 @@ def trainBaye (data, solutions):
         currentData = [d for index, d in enumerate(data) if solutions[index] == possibility]
         # For all pixels
         for j in range(len(currentData[0])):
-            #calculate probability
+            # calculate probability
             moy = sum([x[j] for x in currentData]) / len(currentData)
             ecartttype = math.sqrt(sum([(x[j] - moy) * (x[j] - moy) for x in currentData]) / len(currentData))
-            classifieur[i] += [moy, ecartttype]
+            classifieur[possibility] += [moy, ecartttype]
 
 
 def findUsingBaye(toFind, hyperparameters):
@@ -59,5 +59,5 @@ def findUsingBaye(toFind, hyperparameters):
             r = hyperparameters[j*2+1] + loiNormale(toFind[j], classifieur[i][j*2], classifieur[i][j*2+1])
             if r == 0:
                 continue
-            proba[i] *= pow(r   , hyperparameters[j*2])
+            proba[i] *= pow(r, hyperparameters[j*2])
     return proba.index(max(proba))
