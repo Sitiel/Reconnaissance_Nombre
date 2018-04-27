@@ -23,4 +23,4 @@ def test_data(image):  # noqa: E501
     :rtype: Solution
     """
 
-    return benchmark.test_data(image)
+    return benchmark.test_data(image['data'])

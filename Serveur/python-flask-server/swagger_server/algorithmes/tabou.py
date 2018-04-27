@@ -26,8 +26,8 @@ def tabouCalcul(variablesCount, evaluate):
 
     notProgressing = 0
     a = 0
-    minBorne = -3
-    maxBorne = 200
+    minBorne = -10
+    maxBorne = 100
 
     currentBest = current
     currentBestValue = -9999999999
@@ -42,7 +42,7 @@ def tabouCalcul(variablesCount, evaluate):
         while cmp < 20:
             r = random.randint(0, len(current)-1)
             was = current[r]
-            if (r%1):
+            if (r%2):
                 current[r] = random.uniform(0,1)
             else:
                 current[r] = random.randint(minBorne, maxBorne)
@@ -69,7 +69,9 @@ def tabouCalcul(variablesCount, evaluate):
             currentBest = newCurrent
         if notProgressing > 100 and notProgressing%100 == 0:
             if random.randint(0, 1) == 1:
-                current = [1 for _ in range(len(current))]
+                d = []
+                for _ in range(len(current)):
+                    d.append(random.randint(-10, 100) if _ % 2 == 0 else random.uniform(0, 1))
             else:
                 current = currentBest
             print("Reset !")

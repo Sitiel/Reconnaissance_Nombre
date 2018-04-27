@@ -24,7 +24,7 @@ def ecartType(listImage, moyenne):
 def loiNormale(x, moyenne, ecartType):
     var = float(ecartType) ** 2
     if var == 0:
-        return 1
+        return moyenne
     pi = 3.1415926
     denom = (2 * pi * var) ** .5
     num = math.exp(-(float(x) - float(moyenne)) ** 2 / (2 * var))
@@ -79,5 +79,8 @@ def findUsingBaye(toFind, hyperparameters):
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
         for j in range(len(toFind)):
-            proba[i] *= pow(hyperparameters[j*2+1] +loiNormale(toFind[j], classifieur[i][j * 2], classifieur[i][j * 2 + 1]), hyperparameters[j*2])
+            r = hyperparameters[j*2+1] + loiNormale(toFind[j], classifieur[i][j*2], classifieur[i][j*2+1])
+            if r == 0:
+                continue
+            proba[i] *= pow(r   , hyperparameters[j*2])
     return proba.index(max(proba))

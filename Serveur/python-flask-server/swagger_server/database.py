@@ -49,6 +49,7 @@ class Database:
         self.confusionMatrix.delete_one({"method": "kmeans"})
         self.confusionMatrix.delete_one({"method": "bayesienne"})
         self.confusionMatrix.delete_one({"method": "neural"})
+        self.confusionMatrix.delete_one({"method": "all"})
         
     def getMatrix(self, methodName):
         matrix = self.confusionMatrix.find_one({"method": methodName})
@@ -90,10 +91,23 @@ class Database:
         return list(self.dataTest.find())
 
     def importDataTest(self):
-        with open('data_test.csv', 'r') as csvfile:
+        with open('sauvBase.csv', 'r') as csvfile:
             s = csv.reader(csvfile, delimiter=',', quotechar='|')
             for row in s:
                 self.dataTest.insert({"data": list(map(int, row[1:])), "solution": row[0]})
+
+    def sauvBaseToCsv(self, csvFile):
+        data = self.getAllDataTrain()
+        with open(csvFile, 'w') as csvfile:
+            # writer = csv.writer(csvfile, delimiter=',')
+            for document in data:
+                # writer.writerow([document['value'],document['data'][0]])
+                csvfile.write(str(document['solution']) + ",")
+                for i in range(48):
+                    if (i == 47):
+                        csvfile.write(str(document['data'][i]) + "\n")
+                    else:
+                        csvfile.write(str(document['data'][i]) + ",")
 
     def savePoids(self, poids):
         result = self.poids.find_one({"method": "reseau"})

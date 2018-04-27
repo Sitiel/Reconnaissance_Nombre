@@ -9,22 +9,17 @@ def evaluateBayesienne(hyperparameters):
     global testData
     succes = 0
     for data in testData:
-        find = findUsingBaye(data["data"], hyperparameters)
+        find = findUsingBaye(centrageSolo(data["data"], 6, 8), hyperparameters)
         succes += 1 if find == int(data["solution"]) else 0
     return succes
 
 def trainBayesienne():
     tmp = db.getAllDataTrain()
-    for i in range(len(tmp)):
-        centrageSolo(tmp[i]['data'],6,8)
-    data = [t['data'] for t in tmp]
+    data = [centrageSolo(t['data'], 6, 8) for t in tmp]
     trainBaye(data, [t["solution"] for t in tmp])
     tabouCalcul(96, evaluateBayesienne)
 
 
 testData = db.getAllDataTest() + db.getAllDataTrain()
-for i in range(len(testData)):
-    centrageSolo(testData[i]['data'],6,8)
 
-random.shuffle(testData)
 trainBayesienne()
