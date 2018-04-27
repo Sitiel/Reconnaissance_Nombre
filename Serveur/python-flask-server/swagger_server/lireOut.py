@@ -1,3 +1,5 @@
+#permet de lire le fichier texte out.txt qui permet de recuperer les hyperParamètres ayant le plus d'impact
+
 def lireOutTxt(file):
 	number=[0 for i in range(48)]
 	i = 0

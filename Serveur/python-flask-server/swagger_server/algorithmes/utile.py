@@ -1,6 +1,8 @@
 # image 1 est l'image model, image 2 est l'image a centrer
 import copy
 
+#centrage(image a centrer, image modele, largeur image, hauteur image)
+#permet de centrer l'image1 par rapport a l'image2
 def centrage(image2, image1, largeur, hauteur):
     i = 0
     dist = 0
@@ -27,6 +29,8 @@ def centrage(image2, image1, largeur, hauteur):
             return imageCourante
     return imageRet
 
+#centrage(image, largeur image, hauteur image)
+#permet de centrer l'image au centre du cadre
 def centrageSolo(image, largeur, hauteur):
     hautGauche = [0 for i in range (largeur+hauteur)]
     basDroite = [largeur+hauteur for i in range (largeur+hauteur)]
@@ -60,7 +64,7 @@ def centrageSolo(image, largeur, hauteur):
     return image
 
 
-
+# deplacement image permet de deplacer l'image vers la gauche ou le bas dans son cadre, tout ce qui passe d'un coté revient de l'autre
 # direction correspond a un entier, 1 pour la gauche, 2 pour le bas
 def deplacementImage(image, direction, largeur, hauteur):
     x = len(image)
@@ -92,7 +96,7 @@ def distance(image1, image2):
             retour += 1
     return retour
 
-
+#distValue fait la meme chose que distance mais en l'image1 par rapport a l'image2
 def distValue(image1, image2):
     x = len(image1)
     retour = 0
@@ -102,6 +106,7 @@ def distValue(image1, image2):
             retour += 1
     return retour
 
+#permet d'afficher l'image avec des 0 et des 1
 def printImage(image,largeur,hauteur):
     for i in range (hauteur):
         a = ""
