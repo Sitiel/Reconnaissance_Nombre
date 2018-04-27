@@ -82,14 +82,13 @@ def add_data(dataTrain):  # noqa: E501
 
 
 def start_train():  # noqa: E501
-    """Get Confusion Matrix of all Algorithms
+    """Start the training
 
-    Get Confusion Matrix of all Algorithms  # noqa: E501
+    Start the training  # noqa: E501
 
 
     :rtype: None
     """
-
 
     trainData = db.getAllDataTrain()
     testData = db.getAllDataTest()
@@ -99,13 +98,13 @@ def start_train():  # noqa: E501
     matrixN = db.getMatrix("neural")
     matrixA = db.getMatrix("all")
 
-
-    #tmp = db.getAllDataTrain()
-    #trainBaye([centrageSolo(t["data"], 6, 8) for t in tmp+trainData], [t["solution"] for t in tmp+trainData])
-
+    # We put trainData and testData together to have more informations
     benchmark.set_data(trainData+testData)
 
+    # Neural net of 2 layers of 50 neural
     n = NeuralNet(48, 10, 50, 2, 0.01)
+
+    # Training the neural net
     for i in range(50):
         print("Epoch :", i)
         random.shuffle(trainData)
@@ -113,6 +112,7 @@ def start_train():  # noqa: E501
 
     cmp = 0
 
+    # Evaluate all testData
     for test in testData:
         print(cmp, "/", len(testData))
         cmp += 1
@@ -126,12 +126,12 @@ def start_train():  # noqa: E501
         matrixN[s][result['neural']] += 1
         matrixA[s][result['all']] += 1
 
-
     db.addMatrix("kmeans", matrixK)
     db.addMatrix("bayesienne", matrixB)
     db.addMatrix("neural", matrixN)
     db.addMatrix("all", matrixA)
     return 'success'
+
 
 def reset_matrix():
     db.removeMatrix()
