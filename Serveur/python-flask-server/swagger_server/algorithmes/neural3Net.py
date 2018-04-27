@@ -4,6 +4,7 @@ import copy
 import csv
 from neural3Neurone import neurone
 
+#classe net utilisant la classe neurone inutilisé et non fini
 class Net:
 	
 	def __init__(self, nbLayers, nbNeuroneByLayer, nbSortie, nbEntree, tauxApprentissage):

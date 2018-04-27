@@ -3,6 +3,7 @@ import random
 import copy
 import csv
 
+#classe neurone inutilisé et non fini
 class Neurone:
 	
 
