@@ -39,6 +39,7 @@ def tabouCalcul(variablesCount, evaluate):
 
         cmp = 0
 
+        # generate and evaluate 20 neighbours of current solution
         while cmp < 20:
             r = random.randint(0, len(current)-1)
             was = current[r]
@@ -49,7 +50,6 @@ def tabouCalcul(variablesCount, evaluate):
             if isIn(ltabou, current) == False:
                 cmp += 1
                 tmp = evaluate(current)
-                # print(tmp, current)
                 if tmp > best:
                     best = tmp
                     newCurrent = copy.deepcopy(current)
@@ -62,11 +62,13 @@ def tabouCalcul(variablesCount, evaluate):
         a += 1
         a = a % ltabouSize
 
+        # test if the new Current is the new best
         if best > currentBestValue:
             print("best:", best, current)
             notProgressing = 0
             currentBestValue = best
             currentBest = newCurrent
+        # If not progressing, generate a random current
         if notProgressing > 100 and notProgressing%100 == 0:
             if random.randint(0, 1) == 1:
                 d = []

@@ -30,33 +30,6 @@ def loiNormale(x, moyenne, ecartType):
     num = math.exp(-(float(x) - float(moyenne)) ** 2 / (2 * var))
     return num / denom
 
-
-def evaluateur(data, solutions, toFind):
-    dataSorted = []
-    dataEcarType = []
-    dataMoyenne = []
-    for j in range(10):
-        dataSorted.append([v for i, v in enumerate(data) if solutions[i] == j])
-
-    for k in range(len(dataSorted)):
-        dataMoyenne.append(moyenne(dataSorted[k]))
-        dataEcarType.append(ecartType(dataSorted[k], dataMoyenne[k]))
-
-    bestPercent = 0
-    number = -1
-
-    for k in range(len(dataMoyenne)):
-        currentPercent = -1
-        for j in range(len(dataMoyenne[0])):
-            if dataEcarType[k][j] == 0:
-                currentPercent *= loiNormale(toFind[j], dataMoyenne[k][j], 1)
-            else:
-                currentPercent *= loiNormale(toFind[j], dataMoyenne[k][j], dataEcarType[k][j])
-        if currentPercent > bestPercent:
-            bestPercent = currentPercent
-            number = k
-    return number
-
 possibilities = 0
 classifieur = []
 
@@ -65,9 +38,12 @@ def trainBaye (data, solutions):
     global classifieur
     possibilities = 10
     classifieur = [[] for i in range(possibilities)]
-    for i in range(possibilities):
-        currentData = [d for index, d in enumerate(data) if solutions[index] == i]
+    for possibility in range(possibilities):
+        # Get all data of possibility
+        currentData = [d for index, d in enumerate(data) if solutions[index] == possibility]
+        # For all pixels
         for j in range(len(currentData[0])):
+            #calculate probability
             moy = sum([x[j] for x in currentData]) / len(currentData)
             ecartttype = math.sqrt(sum([(x[j] - moy) * (x[j] - moy) for x in currentData]) / len(currentData))
             classifieur[i] += [moy, ecartttype]
@@ -78,6 +54,7 @@ def findUsingBaye(toFind, hyperparameters):
     global classifieur
     proba = [1 for i in range(possibilities)]
     for i in range(possibilities):
+        # For all pixels
         for j in range(len(toFind)):
             r = hyperparameters[j*2+1] + loiNormale(toFind[j], classifieur[i][j*2], classifieur[i][j*2+1])
             if r == 0:

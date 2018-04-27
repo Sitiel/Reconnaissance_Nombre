@@ -16,6 +16,7 @@ body {
 	width: 100%;
 }
 
+/*BackGround du site*/
 body{
 	background: url("Background.jpg") no-repeat center center fixed;
 	background-size:cover;
@@ -68,6 +69,7 @@ table{
 
 /*Class*/
 
+
 .ui-helper-center {
     text-align: center;
     color: white;
@@ -78,24 +80,17 @@ table{
     height:40%;
 }
 
+/*Classe spéciale pour un background vert*/
 .ui-helper-green {
 	background-color: green;
 }
 
+/*Classe spéciale pour un background rouge*/
 .ui-helper-red {
 	background-color: red;
 }
 
+/*Classe spéciale pour un background orange*/
 .ui-helper-orange {
 	background-color: #FFA500;
 }
-
-.rotated {
-  transform: rotate(90deg);
-  -ms-transform: rotate(90deg); /* IE 9 */
-  -moz-transform: rotate(90deg); /* Firefox */
-  -webkit-transform: rotate(90deg); /* Safari and Chrome */
-  -o-transform: rotate(90deg); /* Opera */
-}
-
-
