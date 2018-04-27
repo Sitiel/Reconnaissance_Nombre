@@ -12,6 +12,19 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="tabou.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/tabou.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-340">
+              <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <marker date="1524830996262" expanded="true" signature="357:463" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="get_data_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/controllers/get_data_controller.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -34,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bayesienne.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bayesienne.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/bayesienne.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="486">
@@ -46,23 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/all.py">
+      <file leaf-file-name="utile.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/utile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#61#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recuit.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/recuit.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+            <state relative-caret-position="345">
+              <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -742,31 +743,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/utile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/train_kmeans.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/tabou.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <marker date="1524830996262" expanded="true" signature="357:463" ph="..." />
           </folding>
         </state>
       </provider>
@@ -782,14 +764,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural3Net.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -833,8 +807,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/recuit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        <state relative-caret-position="240">
+          <caret line="19" column="17" lean-forward="true" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -913,12 +887,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/neural3Net.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="33" column="53" lean-forward="true" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/bayesienne.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="61" column="29" lean-forward="true" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
           <folding>
             <element signature="e#12#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/utile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-flask-server/swagger_server/algorithmes/tabou.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1524830996262" expanded="true" signature="357:463" ph="..." />
           </folding>
         </state>
       </provider>
