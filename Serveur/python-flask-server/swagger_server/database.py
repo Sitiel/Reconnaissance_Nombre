@@ -2,27 +2,6 @@ from pymongo import MongoClient
 from pymongo import ReadPreference
 import csv
 
-def deplacementImage(image, direction, largeur, hauteur):
-    x = len(image)
-    profondeur = 0
-    imageRet = []
-    if direction == 1:
-        for i in range(0, x):
-            if (i + 1) % largeur == 0:
-                imageRet.append(image[largeur * profondeur])
-                profondeur += 1
-            else:
-                imageRet.append(image[i + 1])
-    elif direction == 2:
-        for i in range(0, x):
-            if (i < x):
-                imageRet.append(image[0 - largeur + profondeur])
-                profondeur += 1
-            else:
-                imageRet.image[i - largeur]
-    return imageRet
-
-
 class Database:
     def __init__(self):
         client = MongoClient()
