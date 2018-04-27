@@ -1,7 +1,5 @@
 import connexion
-import six
 from swagger_server.models.data_train import DataTrain  # noqa: E501
-from swagger_server import util
 
 from swagger_server.database import db
 from swagger_server.algorithmes.kmeans import findUsingKMeans
@@ -12,7 +10,6 @@ from swagger_server.algorithmes.utile import centrageSolo
 
 import swagger_server.algorithmes.utile
 from swagger_server.benchmark import benchmark
-import csv
 import random
 
 
@@ -29,7 +26,7 @@ def add_data(dataTrain):  # noqa: E501
     :rtype: None
     """
     
-    #We get the solution for the 3 algorithms
+    # We get the solution for the 3 algorithms
     trainData = db.getAllDataTrain()
 
     resultK = findUsingKMeans([t["data"] for t in trainData], [t["solution"] for t in trainData], dataTrain['data'],
@@ -56,7 +53,7 @@ def add_data(dataTrain):  # noqa: E501
 
     resultA = testAll(dataTrain['data'], resultK, resultB)
 
-    #We had the result to their respectives matrices
+    # We had the result to their respectives matrices
     matrixK = db.getMatrix("kmeans")
     matrixB = db.getMatrix("bayesienne")
     matrixN = db.getMatrix("neural")
@@ -73,7 +70,7 @@ def add_data(dataTrain):  # noqa: E501
     db.addMatrix("neural", matrixN)
     db.addMatrix("all", matrixA)
 
-    #We insert the new data inside the database
+    # We insert the new data inside the database
     db.insertDataTrain(dataTrain)
 
     if connexion.request.is_json:

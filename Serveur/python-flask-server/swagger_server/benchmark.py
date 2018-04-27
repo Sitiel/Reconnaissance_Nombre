@@ -35,9 +35,8 @@ class Benchmark:
         :rtype: Solution
         """
 
-        #resultK = findUsingKMeans(self.kData, self.solutions, image,
-        #                        swagger_server.algorithmes.utile.distValue)
-        resultK = 0
+        resultK = findUsingKMeans(self.kData, self.solutions, image,
+                                swagger_server.algorithmes.utile.distValue)
 
         resultB = findUsingBaye(swagger_server.algorithmes.utile.centrageSolo(image, 6, 8),
                                 [1, 1, 1, 0.09862885458351156, 1, 1, 1, 0.4700416302561873, 1, 1, 1, 1, 1, 1, 1, 1, 1,

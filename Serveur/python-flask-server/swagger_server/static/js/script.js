@@ -85,6 +85,7 @@ c.addEventListener('mouseout', function (event) {
 	down = false;
 }, false);
 
+//Dessine la grille
 function draw() {
 	taille_i = 8;
 	taille_j = 6;
@@ -116,6 +117,7 @@ function draw() {
 	}
 }
 
+//Redessine en blanc la case cliquée
 function drawWhite(x,y){
 
 	ctx.fillStyle = "#FFFFFF";
@@ -130,7 +132,7 @@ function drawWhite(x,y){
 	ctx.stroke();
 }
 
-
+//Remets la grille a zero
 function clearNumber() {
 	number.fill(-1, 0);
 	draw();
@@ -145,6 +147,7 @@ function clearNumber() {
 ///AJAX///
 //////////
 
+//Si un null se trouve dans la grille il est remplacé par un -1
 function eraseNull(table){
 	var retour = table;
 	for (var i = 0; i < 8; i++) {
@@ -163,6 +166,7 @@ function displayNumber() {
 	alert(JSON.stringify(number));
 }
 
+//Liée au bouton Add to train, demande quel nombre est dessiné puis envoie le dessin avec sa solution via JSON au serveur
 function addToTrain() {
 	var chiffre = -1;
 	number = eraseNull(number);
@@ -202,8 +206,9 @@ function addToTrain() {
 
 }
 
+
+//Fonction qui va envoyer en AJAX au format JSON l'image dessinée au serveur python
 function sendToDB() {
-	//Fonction avec un appel ajax qui va envoyer en AJAX au format JSON l'image dessinée et l'envoyer au serveur python
 	number = eraseNull(number);
 	draw();
 	data = JSON.stringify({'data':number});
@@ -238,6 +243,7 @@ function sendToDB() {
 	});
 }
 
+//Fonction de couleur pour les matrices de confusion
 function getColorScheme(num){
 	//KVOISIN
 	if(num > 75.0){
@@ -249,6 +255,7 @@ function getColorScheme(num){
 	}
 }
 
+//Corrige les erreurs liée au calcul de pourcentage dans la matrice (Nb chiffre après la virgule et division par 0)
 function getPercentage(num){
 	ret = 0
 	if(isNaN(num)){
@@ -258,7 +265,7 @@ function getPercentage(num){
 	}
 }
 
-
+//Demande au serveur les matrices de confusion du serveur puis va les afficher dans le site
 function getMatrix() {
 	$.ajax({
         url: "/getMatrix",
@@ -285,7 +292,7 @@ function getMatrix() {
             	totalLigne[i] = [0, 0, 0, 0];
             }
 
-            for(i=0;i<11;i++){//Ligne
+            for(i=0;i<11;i++){//Lignes
             	id_k = '#'+response.data[1].method+'_ligne'+i;
             	id_b = '#'+response.data[0].method+'_ligne'+i;
             	id_n = '#'+response.data[2].method+'_ligne'+i;
@@ -309,10 +316,11 @@ function getMatrix() {
 					$(id_a).append('<th scope="row">' + i + '</th>');
 				}
 
-				for(j=0; j<11; j++){//Colonne
+				for(j=0; j<11; j++){//Colonnes
 					//Colonne&Ligne sur les pourcentages
 					if(i == 10 || j == 10){
 						if(i == j){
+							//Pourcentage de réussite
 							var k = (totalCorrect[1]/total[1])*100;
 							var b = (totalCorrect[0]/total[0])*100;
 							var n = (totalCorrect[2]/total[2])*100;
@@ -323,6 +331,7 @@ function getMatrix() {
 							$(id_a).append("<th class='"+getColorScheme(getPercentage(a))+"'>" + getPercentage(a) + "</th>");
 						}
 						else if(j == 10){
+							//Pourcentage lignes
 							var k = (totalColCorrect[1]/totalCol[1])*100;
 							var b = (totalColCorrect[0]/totalCol[0])*100;
 							var n = (totalColCorrect[2]/totalCol[2])*100;
@@ -333,16 +342,13 @@ function getMatrix() {
 							$(id_a).append("<th class='"+getColorScheme(getPercentage(a))+"'>" + getPercentage(a) + "</th>");
 
 							//Retour a zero pour une nouvelle ligne
-							totalCol[0] = 0;//Total Bayesienne
-							totalCol[1] = 0;//Total KVoisin
-							totalCol[2] = 0;//Total Neural
-							totalCol[3] = 0;
-							totalColCorrect[0] = 0;//Total Bayesienne
-							totalColCorrect[1] = 0;//Total KVoisin
-							totalColCorrect[2] = 0;//Total Neural
-							totalColCorrect[3] = 0;							
+							for(k = 0; k<4; k++){
+								totalCol[k] = 0;
+								totalColCorrect[k] = 0;
+							}		
 
 						}else{
+							//Pourcentage colonne
 							var k = (totalLigneCorrect[j][1]/totalLigne[j][1])*100;
 							var b = (totalLigneCorrect[j][0]/totalLigne[j][0])*100;
 							var n = (totalLigneCorrect[j][2]/totalLigne[j][2])*100;
@@ -355,42 +361,31 @@ function getMatrix() {
 						continue;
 					}
 
-					//Colonne
-					totalCol[0] += response.data[0].matrix[i][j];//Total Bayesienne
-					totalCol[1] += response.data[1].matrix[i][j];//Total KVoisin
-					totalCol[2] += response.data[2].matrix[i][j];//Total Neural
-					totalCol[3] += response.data[3].matrix[i][j];//Total Neural
-					//Ligne
-					totalLigne[j][0] += response.data[0].matrix[i][j];
-					totalLigne[j][1] += response.data[1].matrix[i][j];
-					totalLigne[j][2] += response.data[2].matrix[i][j];
-					totalLigne[j][3] += response.data[3].matrix[i][j];
-					//Diag
-					total[0] += response.data[0].matrix[i][j];//Total Bayesienne
-					total[1] += response.data[1].matrix[i][j];//Total KVoisin
-					total[2] += response.data[2].matrix[i][j];//Total Neural
-					total[3] += response.data[3].matrix[i][j];//Total Neural
+					for(k = 0; k<4; k++){
+						//Colonne
+						totalCol[k] += response.data[k].matrix[i][j];
+						//Ligne
+						totalLigne[j][k] += response.data[k].matrix[i][j];
+						//Diag
+						total[k] += response.data[k].matrix[i][j]; 
+					}			
+
 
 					if (i==j){
 						$(id_k).append("<th class='ui-helper-green'>"+response.data[1].matrix[i][j]+"</th>");
 						$(id_b).append("<th class='ui-helper-green'>"+response.data[0].matrix[i][j]+"</th>");
 						$(id_n).append("<th class='ui-helper-green'>"+response.data[2].matrix[i][j]+"</th>");
 						$(id_a).append("<th class='ui-helper-green'>"+response.data[3].matrix[i][j]+"</th>");
-						//Ligne
-						totalColCorrect[0] += response.data[0].matrix[i][j];
-						totalColCorrect[1] += response.data[1].matrix[i][j];
-						totalColCorrect[2] += response.data[2].matrix[i][j];
-						totalColCorrect[3] += response.data[3].matrix[i][j];
-						//Ligne
-						totalLigneCorrect[j][0] += response.data[0].matrix[i][j];
-						totalLigneCorrect[j][1] += response.data[1].matrix[i][j];
-						totalLigneCorrect[j][2] += response.data[2].matrix[i][j];
-						totalLigneCorrect[j][3] += response.data[3].matrix[i][j];
-						//Diag
-						totalCorrect[0] += response.data[0].matrix[i][j];
-						totalCorrect[1] += response.data[1].matrix[i][j];
-						totalCorrect[2] += response.data[2].matrix[i][j];
-						totalCorrect[3] += response.data[3].matrix[i][j];
+
+						for(k = 0; k<4; k++){
+							//Ligne
+							totalColCorrect[k] += response.data[k].matrix[i][j];
+							//Ligne
+							totalLigneCorrect[j][k] += response.data[k].matrix[i][j];
+							//Diag
+							totalCorrect[k] += response.data[k].matrix[i][j];
+						}
+
 					}else{
 						$(id_k).append("<th>"+response.data[1].matrix[i][j]+"</th>");
 						$(id_b).append("<th>"+response.data[0].matrix[i][j]+"</th>");
@@ -414,7 +409,7 @@ function getMatrix() {
     });
 }
 
-
+//Demande au serveur de commencer l'entraînement des algorithmes
 function startTrain() {
 	$('#loading').modal({
 	    backdrop: 'static',
@@ -441,7 +436,7 @@ function startTrain() {
 	});
 }
 
-
+//Demande au serveur de vider les matrices
 function clearMatrices() {
 	$.ajax({
 	    url: "/resetMatrix",
@@ -472,7 +467,7 @@ function clearMatrices() {
 nbImg = 0;
 tabIdImg = [];
 
-
+//Création d'une div et apparition dans des endroits aléatoire avec une taille aléatoire
 function makeDiv(img,idimg){
     // vary size for fun
     var divsize = ((Math.random()*100) + 50).toFixed();
@@ -498,6 +493,7 @@ function makeDiv(img,idimg){
     }); 
 }
 
+//Faire disparaitre l'image si elle est cliquée
 function stopImage(idimg){
 	tabIdImg[idimg] = false;
 	$("#boobs"+idimg).animate({
@@ -507,6 +503,7 @@ function stopImage(idimg){
 }
 
 
+//Fonction lecture du code konami :  haut,haut,bas,bas,gauche,droite,gauche,droite,b,a
 var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
 var image = [1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4];
 n = 0;
@@ -514,8 +511,7 @@ $(document).keydown(function (e) {
     if (e.keyCode === k[n++]) {
         if (n === k.length) {
         	//creer un random et choisir une des images gif pour le makeDiv
-
-        	for(i = 0; i< 20; i++){
+        	for(i = 0; i< 10; i++){
             	makeDiv('css/bounce'+image[Math.floor(Math.random() * image.length)]+'.gif',nbImg); // à remplacer par votre code
             	tabIdImg.push(true);
             	nbImg+=1;
@@ -532,8 +528,6 @@ $(document).keydown(function (e) {
 ///////////
 ///////////
 ///////////
-
-
 
 
 draw();
