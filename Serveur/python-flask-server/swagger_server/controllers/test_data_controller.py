@@ -13,9 +13,9 @@ import random
 
 
 def test_data(image):  # noqa: E501
-    """Add a train data in database
+    """Test a data
 
-    Add a train data in database  # noqa: E501
+    Test a data and return the output  # noqa: E501
 
     :param image: Data information
     :type image: dict | bytes
