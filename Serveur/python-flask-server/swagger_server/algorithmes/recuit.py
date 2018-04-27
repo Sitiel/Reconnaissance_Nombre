@@ -5,10 +5,12 @@ from lireOut import lireOutTxt
 
 percentParam = []
 
+# function to change one param
 def changeOneParam(param,borneMax,paramToChange):
 	param[paramToChange]=round(random.random()*borneMax-3,2)
 	return param
 
+# function use to get the param to change, determined by a random and the parameter utility
 def chooseParamToChange():
 	global percentParam
 	i = sum(percentParam)
@@ -18,6 +20,7 @@ def chooseParamToChange():
 		if j<=0 :
 			return k
 
+#use to load the parameter utility determined by 2 another process who save the parameter who make a big change
 def reloadParamToChange():
 	global percentParam
 	a0 = [1]*14
@@ -25,27 +28,31 @@ def reloadParamToChange():
 	b = lireOutTxt("out2.txt")
 	percentParam = [x + y + z for x,y,z in zip(a,b,a0)]
 
+#use to calcul the percent with the temperature
 def calculRecuit(delta,temp):
 	return math.exp(-delta/temp)
 
+#use to calcul the acceptation with the delta and the temperature
 def calculAcceptation(delta, temp):
 	recuit = calculRecuit(delta,temp)
 	i = random.random()
 	return i<=recuit
 
+#use to calculate the temperature on each loop
 def calculTemp(temp, variationTemp):
 	return temp*variationTemp
 
+#use to calculate the first temp
 def firstTemp(delta, pourcentage):
 	return -delta/math.log(pourcentage)
 
+#use to calcul the temperature variation to reach 0 of temp on the iteration max
 def firstVariationTemp(tempInit,nbIterationMax):
 	return math.fabs(math.pow(tempInit,1/nbIterationMax)-2)
 
+#use to launch calcul
 def recuitCalcul(variablesCount, evaluate):
 	#hyperParameter
-
-	print("calcul du recuit")
 	nbIterationMax = 500000
 	iteration = 0
 	maxBorne = 100
@@ -99,5 +106,6 @@ def recuitCalcul(variablesCount, evaluate):
 	print("Current best :", currentBest, "with", currentBestValue)
 	return currentBest
 
+#use to evalu, not used
 def evalu(param):
 	return math.fabs(sum(param)-1500)
